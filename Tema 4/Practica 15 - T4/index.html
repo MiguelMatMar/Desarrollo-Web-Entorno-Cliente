@@ -7,19 +7,17 @@
 </head>
 <body>
 <script>
-    async function cargarDatos(array){ // Esto lo he visto en un video de youtube https://www.youtube.com/watch?v=8oL3uFySFcM , que explica como obtener datos de un json
-        
-        const respuesta = await fetch('./personajes.json')
-        const datos = await respuesta.json()
-        datos.personajes.forEach(personaje => {
-            array.push(personaje); // Esto obtiene cada personaje y lo guarda en posiciones en un nuevo array para tenerlo mas ordenado.
-        });   
-    };
-    let infoUsuarios = []; // Variable que guardara toda la info del json
 
-    cargarDatos(infoUsuarios); // Llamamos a la funcion e introducimos el array donde se guardará
-    
-    
+    let infoJson = `{
+  "personajes": [
+    {"nombre":"Eric","apellidos":"Cartman","profesión":"Estudiante","edad":13},
+    {"nombre":"Stan","apellidos":"Marsh","profesión":"Estudiante","edad":9},
+    {"nombre":"Kyle","apellidos":"Broflovski","profesión":"Estudiante","edad":9},
+    {"nombre":"Kenny","apellidos":"McCormick","profesión":"Estudiante","edad":13},
+    {"nombre":"Butters","apellidos":"Stotch","profesión":"Estudiante","edad":9},
+    {"nombre":"Wendy","apellidos":"Testaburger","profesión":"Estudiante","edad":12}
+  ]
+}`;
 
 </script>
 
