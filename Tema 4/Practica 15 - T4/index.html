@@ -19,6 +19,37 @@
   ]
 }`;
 
+    let datosJson = JSON.parse(infoJson); // Lo pasamos a objeto
+    let totalEdad = 0; // Para usarlo ahora
+
+    // AHora mostramos la informacion de todos los personajes
+    datosJson.personajes.forEach(personaje => {
+        console.log(`Nombre: ${personaje.nombre} ${personaje.apellidos}, Profesión: ${personaje.profesión}, Edad: ${personaje.edad}`);
+        totalEdad += personaje.edad;
+    });
+
+    // Mostramos el promedio de edad
+    let mediaEdad = parseInt(totalEdad / datosJson.personajes.length);
+    console.log(`La media de la edad es de ${mediaEdad} años`);
+
+    // Creamos el objeto listaNombreProfesion 
+    let listaNombreProfesion = datosJson.personajes.map(personaje => ({
+        nombre: personaje.nombre,
+        profesión: personaje.profesión,
+    }));
+    // MOstramos el nuevo array unicamente con el nombre y la profesion
+    console.log("Nueva lista de personajes y su profesion: ");
+    listaNombreProfesion.forEach(valor => {
+        console.log(`Nombre: ${valor.nombre}, profesión: ${valor.profesión}`);
+    })
+
+    // Filtramos los mayores y mostramos
+    let mayores11 = datosJson.personajes.filter(personaje => personaje.profesión ="Estudiante" && personaje.edad > 11);
+    console.log("Mayores de 11 años: ");
+    mayores11.forEach(personaje => {
+        console.log(`Nombre: ${personaje.nombre} ${personaje.apellidos}, Profesión: ${personaje.profesión}, Edad: ${personaje.edad}`);
+    } )
+    
 </script>
 
 </body>
