@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    async function cargarDatos(array){ // Esto lo he visto en un video de youtube https://www.youtube.com/watch?v=8oL3uFySFcM , que explica como obtener datos de un json
+        
+        const respuesta = await fetch('./personajes.json')
+        const datos = await respuesta.json()
+        datos.personajes.forEach(personaje => {
+            array.push(personaje); // Esto obtiene cada personaje y lo guarda en posiciones en un nuevo array para tenerlo mas ordenado.
+        });   
+    };
+    let infoUsuarios = []; // Variable que guardara toda la info del json
+
+    cargarDatos(infoUsuarios); // Llamamos a la funcion e introducimos el array donde se guardará
+    
+    
+
+</script>
+
+</body>
+</html>
