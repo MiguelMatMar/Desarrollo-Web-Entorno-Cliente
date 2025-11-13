@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Coche {
+            constructor(combustible,marca) {
+                this.combustible=combustible;
+                this.marca = marca;
+            };
+
+            setCantidad(cantidad){this.combustible = cantidad;};
+            getCantidad(){return this.combustible;};
+
+        setMarca(marca){this.marca = marca;};
+        getMarca(){return this.marca;};
+        
+        rellenarDeposito(cantidad){this.combustible += cantidad;};
+
+        muestraConf(){
+            console.log(`La marca es: ${this.marca}, tiene ${this.combustible} de combustible`);
+        };
+        };
+
+        let marcaCoche = promt("Introduce la marca del vehiculo");
+        let coche = new Coche(150,"fiat");
+        coche.muestraConf();
+    </script>
+</body>
+</html>
