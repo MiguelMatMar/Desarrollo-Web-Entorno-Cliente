@@ -16,19 +16,43 @@
             setCantidad(cantidad){this.combustible = cantidad;};
             getCantidad(){return this.combustible;};
 
-        setMarca(marca){this.marca = marca;};
-        getMarca(){return this.marca;};
-        
-        rellenarDeposito(cantidad){this.combustible += cantidad;};
+            setMarca(marca){this.marca = marca;};
+            getMarca(){return this.marca;};
+            
+            rellenarDeposito(cantidad){this.combustible += cantidad;};
 
-        muestraConf(){
-            console.log(`La marca es: ${this.marca}, tiene ${this.combustible} de combustible`);
-        };
+            muestraConf(){
+                console.log(`La marca es: ${this.marca}, tiene ${this.combustible} de combustible`);
+            };
         };
 
-        let marcaCoche = promt("Introduce la marca del vehiculo");
-        let coche = new Coche(150,"fiat");
-        coche.muestraConf();
+        let seguirIntroduciendo;
+        let marcaCoche;
+        let combustibleCoche;
+        let coche;
+        let coches = [];
+        do{
+        marcaCoche = prompt("Introduce la marca del vehiculo");
+        combustibleCoche = parseInt(prompt("Introduce el combustible del vehiculo"));
+        coche = new Coche(combustibleCoche,marcaCoche);
+
+        coches.push(coche)
+
+        seguirIntroduciendo = confirm("¿Quieres seguir introduciendo coches?");
+        }while(seguirIntroduciendo == true);
+
+        document.write("<style> *{margin: 0 auto;} td, th { border: 2px solid black; padding: 20px; } table { border-collapse: collapse; } </style>");
+        document.write("<table>");
+        document.write("<tr>");
+        document.write(`<th> Marca: </th> <th> Combustible </th>`)
+        document.write("</tr>");
+        document.write("<tr>");
+        coches.forEach(coche => {
+            document.write(`<th> ${coche.marca} </th> <th> ${coche.combustible} </th>`)
+            document.write("</tr>");
+        });
+        document.write("</table>");
+
     </script>
 </body>
 </html>
