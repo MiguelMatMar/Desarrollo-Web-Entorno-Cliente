@@ -7,5 +7,30 @@
 </head>
 <body>
     <script src="./script.js"></script>
+
+    <!-- 
+    - Un constructor o clase llamado ParImpar que recibe como argumento el numero. Bien
+
+    - Una propiedad x que recogera dicho argumento. Bien
+
+    - Un metodo error() que muestre por consola el mensaje "Dato erroneo" (puedes usar
+    console.error) si no se ha recibido un numero, o "Dato correcto" en caso contrario.
+
+    - Un metodo llamado resuelve() que, mediante un cuadro de dialogo, devuelva la palabra "par" si
+    el numero es par e "impar" en caso contrario.
+
+    - Un metodo es() que devuelva la cadena de caracteres "par" o "impar". Usa el operador flecha.
+
+    - Un metodo muestraRandom() que escriba en el documento 10 numeros aleatorios del 1 al 
+    10000 y que a su lado se diga si es par o impar gracias al metodo anterior.
+-->
+
+    <script>
+        let numeroUsr = 5;
+        let nuevaClase = new parImpar(numeroUsr);
+        console.log(nuevaClase.resuelve());
+        console.log(nuevaClase.es(numeroUsr));
+        nuevaClase.muestraRandom();
+    </script>
 </body>
 </html>
