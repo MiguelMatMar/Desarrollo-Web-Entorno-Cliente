@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <script src="./script.js"></script>
+    <script src="./scripts.js"></script>
 
     <!-- 
     - Un constructor o clase llamado ParImpar que recibe como argumento el numero. Bien
@@ -26,7 +26,7 @@
 -->
 
     <script>
-        let numeroUsr = 5;
+        let numeroUsr = parseInt(prompt("Introduce un numero"));
         let nuevaClase = new parImpar(numeroUsr);
         console.log(nuevaClase.resuelve());
         console.log(nuevaClase.es(numeroUsr));
