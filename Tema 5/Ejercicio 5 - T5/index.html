@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        Ejercicio 5.- Herencia con constructores
+            Define un tipo de objeto Cometa cuyas propiedades de instancia (específicas de cada objeto) sean
+            diametro, temperatura y nombre. La temperatura será un valor numérico que suponemos está en grados
+            centígrados.
+
+            Como propiedad común a todos los objetos usaremos def (que contendrá la definición de cometa según el
+            diccionario) y como métodos comunes getRadio() (que debe devolver el radio) y getTemp() (que debe
+            devolver el valor de temperatura expresado en grados Farenheit). Para la conversión de centígrados a
+            Farenheit podrás seguir la fórmula: ºF = (ºC · 1,8) + 32
+
+            Crea tres objetos de tipo cometa y comprueba que puedes acceder tanto a las propiedades específicas
+            como a las propiedades y métodos comunes desde cada objeto.
+
+            Elige la opción de implementación que prefieras.
+    </p>
+    <script>
+        function Cometa(diametro,temperatura,nombre) {
+            this.diametro = diametro;
+            this.temperatura = parseInt(temperatura);
+            this.nombre = nombre;
+        }
+        Cometa.prototype.getRadio = () => this.diametro/2;
+        Cometa.prototype.getTemp = () => (this.temperatura * 1,8) +32;
+
+        let cometa1 = new Cometa(10,10000,"Cometa 1");
+        console.log("Radio del primer cometa: "+ cometa1.getRadio())
+    </script>
+</body>
+</html>
