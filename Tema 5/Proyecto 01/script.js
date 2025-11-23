@@ -1,11 +1,11 @@
 let filas = 5;      
-let columnas = 5;
+let columnas = 10;
 let numMinas = 5;
 
 let tablero = []; // Tablero principal
 let tableroRevelado = [];  // Nuevo tablero para revelar todas las celdas
 
-// Inicializa el tablero y el tableroRevelado, son 2 tableros diferentes, uno para el juego (con las minas etc) y otro para mostrar las celdas reveladas al usuario 
+// Inicializa el tableroRevelado (con la configuracion del tablero del usuario), son 2 tableros diferentes, uno para el juego (con las minas etc) y otro para mostrar las celdas reveladas al usuario, inicialmente todas las celdas son falsas (no reveladas)
 for (let i = 0; i < filas; i++) {
     tableroRevelado[i] = [];
     for (let j = 0; j < columnas; j++) {
@@ -42,9 +42,31 @@ function generarTablero(filas, columnas, numMinas) {
     }
     return tablero;
 }
-
-function actualizarTablero(fila, columna) { // Función para actualizar el tablero al revelar una celda
+// Esta función se llama cuando el usuario hace clic en una celda para revelarla, es la función principal del juego
+function actualizarTablero(fila, columna) { 
     tableroRevelado[fila][columna] = true; // Marca la celda como revelada
+    if (tablero[fila][columna] === 'M') { // Si la celda es una mina
+        alert("¡Has perdido! Has encontrado una mina.");
+        revelarTablero(tablero); // Revela todo el tablero al perder
+        return;
+    }
+    if (tablero[fila][columna] === 0) { // Encargado de revelar las celdas adyacentes si la celda es 0
+        // Revela las celdas adyacentes si la celda es 0
+        for (let x = -1; x <= 1; x++) { // Recorre las filas adyacentes
+            for (let y = -1; y <= 1; y++) { // Recorre las columnas adyacentes
+                let nuevaFila = fila + x; // Calcula la nueva fila
+                let  nuevaColumna = columna + y; // Calcula la nueva columna
+                if (nuevaFila >= 0 && nuevaFila < filas && nuevaColumna >= 0 && nuevaColumna < columnas && !tableroRevelado[nuevaFila][nuevaColumna]) { // Verifica los límites y si la celda no está revelada
+                    actualizarTablero(nuevaFila, nuevaColumna); // Llama recursivamente para revelar la celda adyacente, hasta que no haya más celdas 0 adyacentes
+                }
+            }
+        }
+    }
+    if(tableroRevelado.flat().filter(celda => celda).length === filas * columnas - numMinas) {
+        alert("¡Felicidades! ¡Has ganado!");
+        revelarTablero(tablero);
+        return;
+    }
     mostrarTablero();
 }
 
