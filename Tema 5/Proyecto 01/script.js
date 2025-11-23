@@ -1,13 +1,19 @@
-let filas = 5;
+let filas = 5;      
 let columnas = 5;
 let numMinas = 5;
-let tablero = generarTablero(filas, columnas, numMinas);
-mostrarTablero();
 
+let tablero = []; // Tablero principal
+let tableroRevelado = [];  // Nuevo tablero para revelar todas las celdas
 
+// Inicializa el tablero y el tableroRevelado, son 2 tableros diferentes, uno para el juego (con las minas etc) y otro para mostrar las celdas reveladas al usuario 
+for (let i = 0; i < filas; i++) {
+    tableroRevelado[i] = [];
+    for (let j = 0; j < columnas; j++) {
+        tableroRevelado[i][j] = false; // Inicializa todas las celdas como no reveladas
+    }
+}
 
 function generarTablero(filas, columnas, numMinas) {
-    const tablero = [];
     // i es filas, j es columnas
     for (let i = 0; i < filas; i++) {
         tablero[i] = [];
@@ -37,15 +43,22 @@ function generarTablero(filas, columnas, numMinas) {
     return tablero;
 }
 
+function actualizarTablero(fila, columna) { // Función para actualizar el tablero al revelar una celda
+    tableroRevelado[fila][columna] = true; // Marca la celda como revelada
+    mostrarTablero();
+}
 
-
-function mostrarTablero() {
+function mostrarTablero() { 
     let tableroSalida = "<table border='1' cellpadding='5' cellspacing='0'>";
 
-    for (let i = 0; i < tablero.length; i++) {
+    for (let i = 0; i < filas; i++) {
         tableroSalida += "<tr>";
-        for (let j = 0; j < tablero[i].length; j++) { 
-            tableroSalida += `<td><button onclick="actualizarTablero(${i}, ${j})">?</button></td>`; // Botón para revelar la celda que se selecciona
+        for (let j = 0; j < columnas; j++) {
+            if (tableroRevelado[i][j]) {
+                tableroSalida += `<td>${tablero[i][j]}</td>`; // Muestra el valor si está revelado
+            } else {
+                tableroSalida += `<td><button onclick="actualizarTablero(${i}, ${j})">?</button></td>`; // Botón para revelar la celda que se selecciona
+            }
         }
         tableroSalida += "</tr>";
     }
@@ -54,37 +67,20 @@ function mostrarTablero() {
     document.getElementById("tableroBuscaMinas").innerHTML = tableroSalida;
 }
 
-function actualizarTablero(fila, columna) {
-    let tableroActualizado = "<table border='1' cellpadding='5' cellspacing='0'>";
-
-    for (let i = 0; i < tablero.length; i++) {
-        tableroActualizado += "<tr>";
-        for (let j = 0; j < tablero[i].length; j++) {
-            if (i === fila && j === columna) {
-                tableroActualizado += "<td>" + tablero[i][j] + "</td>";
-            } else {
-                tableroActualizado += `<td><button onclick="actualizarTablero(${i}, ${j})">?</button></td>`; // Mantiene los botones en las celdas no seleccionadas
-            }
-        }
-        tableroActualizado += "</tr>";
-    }
-
-    tableroActualizado += "</table>";
-    document.getElementById("tableroBuscaMinas").innerHTML = tableroActualizado;
-}
 function revelarTablero(tablero) { // Función para revelar todo el tablero, ya sea al ganar o perder
-    let tableroRevelado = "";
-    tableroRevelado += "<table border='1' cellpadding='5' cellspacing='0'>";
+    let salida = ""; // Variable local para la salida
+    salida += "<table border='1' cellpadding='5' cellspacing='0'>";
     for (let i = 0; i < tablero.length; i++) {
-        tableroRevelado += "<tr>";
+        salida += "<tr>";
         for (let j = 0; j < tablero[i].length; j++) {
-            tableroRevelado += "<td>" + tablero[i][j] + "</td>";
+            salida += "<td>" + tablero[i][j] + "</td>";
         }
-        tableroRevelado += "</tr>";
+        salida += "</tr>";
     }
-    tableroRevelado += "</table>";
-    document.getElementById("tableroBuscaMinas").innerHTML = tableroRevelado;
+    salida += "</table>";
+    document.getElementById("tableroBuscaMinas").innerHTML = salida;
 }
 
-
-
+// Genera y muestra el tablero inicial
+generarTablero(filas, columnas, numMinas);
+mostrarTablero();
