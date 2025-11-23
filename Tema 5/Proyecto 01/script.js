@@ -1,5 +1,14 @@
+let filas = 5;
+let columnas = 5;
+let numMinas = 5;
+let tablero = generarTablero(filas, columnas, numMinas);
+mostrarTablero();
+
+
+
 function generarTablero(filas, columnas, numMinas) {
     const tablero = [];
+    // i es filas, j es columnas
     for (let i = 0; i < filas; i++) {
         tablero[i] = [];
         for (let j = 0; j < columnas; j++) {
@@ -10,7 +19,7 @@ function generarTablero(filas, columnas, numMinas) {
     while (minasColocadas < numMinas) {
         const fila = Math.floor(Math.random() * filas);
         const columna = Math.floor(Math.random() * columnas);
-        if (tablero[fila][columna] !== 'M') {
+        if (tablero[fila][columna] !== 'M') { // Si no hay mina ya colocada
             tablero[fila][columna] = 'M'; // Coloca una mina
             minasColocadas++;
             // Actualiza los números alrededor de la mina
@@ -27,16 +36,55 @@ function generarTablero(filas, columnas, numMinas) {
     }
     return tablero;
 }
-function mostrarTablero(tablero) {
+
+
+
+function mostrarTablero() {
+    let tableroSalida = "<table border='1' cellpadding='5' cellspacing='0'>";
+
     for (let i = 0; i < tablero.length; i++) {
-        console.log(tablero[i].join(' '));
+        tableroSalida += "<tr>";
+        for (let j = 0; j < tablero[i].length; j++) { 
+            tableroSalida += `<td><button onclick="actualizarTablero(${i}, ${j})">?</button></td>`; // Botón para revelar la celda que se selecciona
+        }
+        tableroSalida += "</tr>";
     }
+
+    tableroSalida += "</table>";
+    document.getElementById("tableroBuscaMinas").innerHTML = tableroSalida;
 }
 
-mostrarTablero(generarTablero(5, 5, 5));
+function actualizarTablero(fila, columna) {
+    let tableroActualizado = "<table border='1' cellpadding='5' cellspacing='0'>";
 
-function buscaMinas(){
+    for (let i = 0; i < tablero.length; i++) {
+        tableroActualizado += "<tr>";
+        for (let j = 0; j < tablero[i].length; j++) {
+            if (i === fila && j === columna) {
+                tableroActualizado += "<td>" + tablero[i][j] + "</td>";
+            } else {
+                tableroActualizado += `<td><button onclick="actualizarTablero(${i}, ${j})">?</button></td>`; // Mantiene los botones en las celdas no seleccionadas
+            }
+        }
+        tableroActualizado += "</tr>";
+    }
 
-    
-
+    tableroActualizado += "</table>";
+    document.getElementById("tableroBuscaMinas").innerHTML = tableroActualizado;
 }
+function revelarTablero(tablero) { // Función para revelar todo el tablero, ya sea al ganar o perder
+    let tableroRevelado = "";
+    tableroRevelado += "<table border='1' cellpadding='5' cellspacing='0'>";
+    for (let i = 0; i < tablero.length; i++) {
+        tableroRevelado += "<tr>";
+        for (let j = 0; j < tablero[i].length; j++) {
+            tableroRevelado += "<td>" + tablero[i][j] + "</td>";
+        }
+        tableroRevelado += "</tr>";
+    }
+    tableroRevelado += "</table>";
+    document.getElementById("tableroBuscaMinas").innerHTML = tableroRevelado;
+}
+
+
+
