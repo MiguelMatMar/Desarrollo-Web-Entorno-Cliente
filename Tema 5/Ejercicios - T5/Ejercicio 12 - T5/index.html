@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Circulo(radio){
+            this.radio = radio;
+            this.calcularCircunferencia = function(){
+                return 2*Math.PI*this.radio;
+            }
+        }
+        let circulo = new Circulo(2);
+        console.log(circulo.calcularCircunferencia());
+    </script>
+</body>
+</html>
