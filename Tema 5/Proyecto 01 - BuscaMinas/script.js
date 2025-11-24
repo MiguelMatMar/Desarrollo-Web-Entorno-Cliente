@@ -7,7 +7,7 @@ let tablero = []; // Tablero principal
 let tableroRevelado = [];  // Nuevo tablero para revelar todas las celdas
 
 function generarTablero(filas, columnas, numMinas) {
-    tablero = [];
+    tablero = []; // Reinicia el tablero cada vez que se genera uno nuevo, por si acaso
     // i es filas, j es columnas
     for (let i = 0; i < filas; i++) {
         tablero[i] = [];
