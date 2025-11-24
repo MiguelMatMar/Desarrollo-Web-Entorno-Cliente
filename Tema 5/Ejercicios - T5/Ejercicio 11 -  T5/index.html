@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Posicion(x,y){
+            this.x = x;
+            this.y = y;
+            this.distancia = function(posicion2){
+                let dx = this.x - posicion2.x;
+                let dy = this.y - posicion2.y
+                return Math.sqrt(dx * dx + dy * dy);
+            }
+        }
+        let posicion1 = new Posicion(3,4);
+        let posicion2 = new Posicion(7,1);
+        
+        console.log(posicion1.distancia(posicion2));
+
+    </script>
+</body>
+</html>
