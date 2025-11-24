@@ -1,19 +1,13 @@
-let filas = 5;      
-let columnas = 10;
-let numMinas = 5;
+// Variables globales del juego, para que sean accesibles desde todas las funciones, porque sino no funcionaria
+let filas;      
+let columnas;
+let numMinas;
 
 let tablero = []; // Tablero principal
 let tableroRevelado = [];  // Nuevo tablero para revelar todas las celdas
 
-// Inicializa el tableroRevelado (con la configuracion del tablero del usuario), son 2 tableros diferentes, uno para el juego (con las minas etc) y otro para mostrar las celdas reveladas al usuario, inicialmente todas las celdas son falsas (no reveladas)
-for (let i = 0; i < filas; i++) {
-    tableroRevelado[i] = [];
-    for (let j = 0; j < columnas; j++) {
-        tableroRevelado[i][j] = false; // Inicializa todas las celdas como no reveladas
-    }
-}
-
 function generarTablero(filas, columnas, numMinas) {
+    tablero = [];
     // i es filas, j es columnas
     for (let i = 0; i < filas; i++) {
         tablero[i] = [];
@@ -23,18 +17,19 @@ function generarTablero(filas, columnas, numMinas) {
     }
     let minasColocadas = 0;
     while (minasColocadas < numMinas) {
-        const fila = Math.floor(Math.random() * filas);
-        const columna = Math.floor(Math.random() * columnas);
-        if (tablero[fila][columna] !== 'M') { // Si no hay mina ya colocada
-            tablero[fila][columna] = 'M'; // Coloca una mina
+        let fila = Math.floor(Math.random() * filas);
+        let columna = Math.floor(Math.random() * columnas);
+        if (tablero[fila][columna] !== '💣') { // Si no hay mina ya colocada
+            tablero[fila][columna] = '💣'; // Coloca una mina
             minasColocadas++;
             // Actualiza los números alrededor de la mina
-            for (let x = -1; x <= 1; x++) {
-                for (let y = -1; y <= 1; y++) {
-                    const nuevaFila = fila + x;
-                    const nuevaColumna = columna + y;
-                    if (nuevaFila >= 0 && nuevaFila < filas && nuevaColumna >= 0 && nuevaColumna < columnas && tablero[nuevaFila][nuevaColumna] !== 'M') {
-                        tablero[nuevaFila][nuevaColumna]++;
+            for (let x = -1; x <= 1; x++) { // Recorre las filas adyacentes
+                for (let y = -1; y <= 1; y++) { // Recorre las columnas adyacentes
+                    let nuevaFila = fila + x; // Calcula la nueva fila
+                    let nuevaColumna = columna + y; // Calcula la nueva columna
+                     // Verifica los límites y si la celda no es una mina
+                    if (nuevaFila >= 0 && nuevaFila < filas && nuevaColumna >= 0 && nuevaColumna < columnas && tablero[nuevaFila][nuevaColumna] !== '💣') {
+                        tablero[nuevaFila][nuevaColumna]++; // Incrementa el contador de minas adyacentes
                     }
                 }
             }
@@ -42,10 +37,11 @@ function generarTablero(filas, columnas, numMinas) {
     }
     return tablero;
 }
+
 // Esta función se llama cuando el usuario hace clic en una celda para revelarla, es la función principal del juego
 function actualizarTablero(fila, columna) { 
     tableroRevelado[fila][columna] = true; // Marca la celda como revelada
-    if (tablero[fila][columna] === 'M') { // Si la celda es una mina
+    if (tablero[fila][columna] === '💣') { // Si la celda es una mina
         alert("¡Has perdido! Has encontrado una mina.");
         revelarTablero(tablero); // Revela todo el tablero al perder
         return;
@@ -64,38 +60,56 @@ function actualizarTablero(fila, columna) {
     }
     if(tableroRevelado.flat().filter(celda => celda).length === filas * columnas - numMinas) {
         alert("¡Felicidades! ¡Has ganado!");
-        revelarTablero(tablero);
+        revelarTablero();
         return;
     }
     mostrarTablero();
 }
 
-function mostrarTablero() { 
+// Función para mostrar el tablero en HTML
+function mostrarTablero() { // Función para mostrar el tablero en HTML, mostrando solo las celdas reveladas, y es el tablero que ve el usuario e interactúa con él
     let tableroSalida = "<table border='1' cellpadding='5' cellspacing='0'>";
 
-    for (let i = 0; i < filas; i++) {
-        tableroSalida += "<tr>";
-        for (let j = 0; j < columnas; j++) {
-            if (tableroRevelado[i][j]) {
-                tableroSalida += `<td>${tablero[i][j]}</td>`; // Muestra el valor si está revelado
+    for (let i = 0; i < filas; i++) { 
+        tableroSalida += "<tr>"; // Inicia una nueva fila
+        let valor = 0;
+        for (let j = 0; j < columnas; j++) { // Recorre cada columna
+            if (tableroRevelado[i][j]) { // Si la celda está revelada
+                valor = tablero[i][j]; // Obtiene el valor de la celda
+                if (valor === "💣") { // Si es una mina pues muestra la mina
+                    tableroSalida += `<td class="mina">💣</td>`;
+                } 
+                else { // Si es un número, muestra el número con una clase para el color
+                    tableroSalida += `<td class="num${valor}">${valor}</td>`;
+                }
             } else {
-                tableroSalida += `<td><button onclick="actualizarTablero(${i}, ${j})">?</button></td>`; // Botón para revelar la celda que se selecciona
+                tableroSalida += `<td><button onclick="actualizarTablero(${i}, ${j})">?</button></td>`; // Celda no revelada, muestra un botón
             }
         }
-        tableroSalida += "</tr>";
+        tableroSalida += "</tr>"; // Cierra la fila
     }
 
     tableroSalida += "</table>";
     document.getElementById("tableroBuscaMinas").innerHTML = tableroSalida;
 }
 
-function revelarTablero(tablero) { // Función para revelar todo el tablero, ya sea al ganar o perder
+function revelarTablero() { // Función para revelar todo el tablero, ya sea al ganar o perder
     let salida = ""; // Variable local para la salida
     salida += "<table border='1' cellpadding='5' cellspacing='0'>";
+    let valor = 0;
     for (let i = 0; i < tablero.length; i++) {
         salida += "<tr>";
         for (let j = 0; j < tablero[i].length; j++) {
-            salida += "<td>" + tablero[i][j] + "</td>";
+            valor = tablero[i][j]; // Obtiene el valor de la celda, como en el tablero original
+            if (valor === 0) { // Si el valor es 0, muestra una celda vacía
+                salida += `<td class="vacio">0</td>`;
+            } 
+            else if (valor === "💣") { // Si es una mina pues muestra la mina
+                salida += `<td class="mina">💣</td>`;
+            } 
+            else { // Si es un número, muestra el número con una clase para el color
+                salida += `<td class="num${valor}">${valor}</td>`;
+            }
         }
         salida += "</tr>";
     }
@@ -103,6 +117,26 @@ function revelarTablero(tablero) { // Función para revelar todo el tablero, ya 
     document.getElementById("tableroBuscaMinas").innerHTML = salida;
 }
 
-// Genera y muestra el tablero inicial
-generarTablero(filas, columnas, numMinas);
-mostrarTablero();
+// Cuando el jugador pulse el boton de iniciar o reiniciar, se genera el tablero y se muestra
+function iniciarJuego() {
+
+    filas = parseInt(prompt("Ingrese el número de filas (mínimo 5):", "5"));
+    columnas = parseInt(prompt("Ingrese el número de columnas (mínimo 5):", "10"));
+    numMinas = parseInt(prompt("Ingrese el número de minas (mínimo 1):", "5"));
+
+    if (isNaN(filas) || filas < 5) filas = 5;
+    if (isNaN(columnas) || columnas < 5) columnas = 10;
+    if (isNaN(numMinas) || numMinas < 1) numMinas = 5;
+
+
+    // Inicializa el tableroRevelado (con la configuracion del tablero del usuario), son 2 tableros diferentes, uno para el juego (con las minas etc) y otro para mostrar las celdas reveladas al usuario, inicialmente todas las celdas son falsas (no reveladas)
+    for (let i = 0; i < filas; i++) {
+        tableroRevelado[i] = [];
+        for (let j = 0; j < columnas; j++) {
+            tableroRevelado[i][j] = false; // Inicializa todas las celdas como no reveladas
+        }
+    }
+
+    generarTablero(filas, columnas, numMinas);
+    mostrarTablero();
+}

@@ -6,39 +6,85 @@
     <title>BuscaMinas - Miguel Mateo Marquez</title>
 
     <style>
+
+        .num1 { color: green; font-weight: bold; }
+        .num2 { color: yellow; font-weight: bold; }
+        .num3 { color: red; font-weight: bold; }
+        .num4 { color: purple; font-weight: bold; }
+        .num5 { color: brown; font-weight: bold; }
+
+
         body{
+            background: linear-gradient(135deg, #1e1e2f, #2d2d44);
+            color: white;
+            font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding: 30px;
+            gap: 20px;
+            text-align: center;
+            height: 91.5vh;
+        }
+
+        h1{
+            font-size: 2.5em;
+            text-shadow: 2px 2px 5px #000;
+            margin-bottom: 10px;
+        }
+
+        #tableroBuscaMinas{
+            display: flex;
             justify-content: center;
-            height: 100vh;
-            & div{
-                width: 100%;
+            align-items: center; 
+            margin-top: 20px;
+        }
+
+        table{
+            border-collapse: collapse;
+            box-shadow: 0 0 15px rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            & button{
                 height: 100%;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
+                width: 100%;
+                font-size: 1.2em;
+                background-color: #4a4a6a;
+                border: none;
+                color: white;
+                cursor: pointer;
+                transition: 0.2s ease;
             }
         }
-        td, tr{
-            width: 100px;
-            height: 100px;
-            text-align: center;
-            font-size: 2em;
+
+        td{
+            width: 60px;
+            height: 60px;
+            font-size: 1.5em;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #fff;
         }
-        button{
-            height: 100%;
-            width: 100%;
-            font-size: 75%;
+
+        td.revelado{
+            background-color: rgba(255,255,255,0.25);
+        }
+        
+
+        button:hover{
+            background-color: #6b6b90;
+        }
+
+        button:active{
+            transform: scale(0.9);
         }
     </style>
 </head>
 <body>
     <h1>Bienvenido a mi Buscaminas</h1>
     <div id="tableroBuscaMinas"></div>
-
-    
+    <button onclick="iniciarJuego()">Jugar/Reiniciar</button>
+    <button onclick="revelarTablero()">Mostrar</button>
     <script src="script.js"></script>
 </body>
 </html>
