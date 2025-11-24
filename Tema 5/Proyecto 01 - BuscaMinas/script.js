@@ -119,6 +119,8 @@ function revelarTablero() { // Función para revelar todo el tablero, ya sea al 
 
 // Cuando el jugador pulse el boton de iniciar o reiniciar, se genera el tablero y se muestra
 function iniciarJuego() {
+    tableroRevelado = []; // Reinicia el tablero revelado cada vez que se inicia un nuevo juego
+    tablero = []; // Reinicia el tablero principal cada vez que se inicia un nuevo juego
 
     filas = parseInt(prompt("Ingrese el número de filas (mínimo 5):", "5"));
     columnas = parseInt(prompt("Ingrese el número de columnas (mínimo 5):", "10"));
