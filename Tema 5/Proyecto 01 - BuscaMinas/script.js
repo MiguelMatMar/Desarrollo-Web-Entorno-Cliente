@@ -6,6 +6,7 @@ let numMinas;
 let tablero = []; // Tablero principal
 let tableroRevelado = [];  // Nuevo tablero para revelar todas las celdas
 
+// Esta función genera el tablero del juego con las minas y los números correspondientes
 function generarTablero(filas, columnas, numMinas) {
     tablero = []; // Reinicia el tablero cada vez que se genera uno nuevo, por si acaso
     // i es filas, j es columnas
@@ -22,7 +23,7 @@ function generarTablero(filas, columnas, numMinas) {
         if (tablero[fila][columna] !== '💣') { // Si no hay mina ya colocada
             tablero[fila][columna] = '💣'; // Coloca una mina
             minasColocadas++;
-            // Actualiza los números alrededor de la mina
+            // Actualiza los números alrededor de la mina, es decir, cada vez que se coloca una mina, se incrementa el contador de las celdas adyacentes
             for (let x = -1; x <= 1; x++) { // Recorre las filas adyacentes
                 for (let y = -1; y <= 1; y++) { // Recorre las columnas adyacentes
                     let nuevaFila = fila + x; // Calcula la nueva fila
@@ -58,7 +59,7 @@ function actualizarTablero(fila, columna) {
             }
         }
     }
-    if(tableroRevelado.flat().filter(celda => celda).length === filas * columnas - numMinas) {
+    if(tableroRevelado.flat().filter(celda => celda).length === filas * columnas - numMinas) { // Verifica si todas las celdas no minadas han sido reveladas
         alert("¡Felicidades! ¡Has ganado!");
         revelarTablero();
         return;
@@ -66,8 +67,8 @@ function actualizarTablero(fila, columna) {
     mostrarTablero();
 }
 
-// Función para mostrar el tablero en HTML
-function mostrarTablero() { // Función para mostrar el tablero en HTML, mostrando solo las celdas reveladas, y es el tablero que ve el usuario e interactúa con él
+// Función para mostrar el tablero en HTML, mostrando solo las celdas reveladas, y es el tablero que ve el usuario e interactúa con él
+function mostrarTablero() { 
     let tableroSalida = "<table border='1' cellpadding='5' cellspacing='0'>";
 
     for (let i = 0; i < filas; i++) { 
@@ -93,7 +94,8 @@ function mostrarTablero() { // Función para mostrar el tablero en HTML, mostran
     document.getElementById("tableroBuscaMinas").innerHTML = tableroSalida;
 }
 
-function revelarTablero() { // Función para revelar todo el tablero, ya sea al ganar o perder
+// Función para revelar todo el tablero, ya sea al ganar o perder
+function revelarTablero() { 
     let salida = ""; // Variable local para la salida
     salida += "<table border='1' cellpadding='5' cellspacing='0'>";
     let valor = 0;
