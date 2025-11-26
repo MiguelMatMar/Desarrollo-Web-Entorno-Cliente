@@ -128,6 +128,11 @@ function iniciarJuego() {
     columnas = parseInt(prompt("Ingrese el número de columnas (mínimo 5):", "10"));
     numMinas = parseInt(prompt("Ingrese el número de minas (mínimo 1):", "5"));
 
+    if(numMinas >= filas * columnas) { // Regla para que el numero de minas no sea mayor o igual al numero de celdas
+        alert("El número de minas debe ser menor que el número total de celdas (filas x columnas). Por favor, ingrese los valores nuevamente.");
+        return; // Sale de la función sin iniciar el juego
+    }
+
     if (isNaN(filas) || filas < 5) filas = 5;
     if (isNaN(columnas) || columnas < 5) columnas = 10;
     if (isNaN(numMinas) || numMinas < 1) numMinas = 5;

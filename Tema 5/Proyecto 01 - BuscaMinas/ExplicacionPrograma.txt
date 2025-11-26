@@ -1,2 +1,62 @@
 Archivo para la Explicacion de lo que hace el programa
 
+Este buscaminas funciona con 2 tablas:
+    1- Tablero Real(tablero). En este tablero esta el juego de verdad, donde estan los numeros y las minas
+    2- Tablero Revelado(tableroRevelado). Este tablero dice lo que tiene que estar revelado, con true y false.
+
+Es decir, se revelan las posiciones unicamente cuando el tablero revelado lo diga, si el jugador le da a la posicion
+1,1, entonces se llamara a la funcion, actualizarTablero, y se pondra en tablero revelado esa posicion en true, y
+mostrara en pantalla lo que tenga tablero real en esa posicion, asi nunca se conocerá lo que tenga el tablero.
+
+Todo esto se iniciará cuando el usuario pulse el boton de Jugar/Reiniciar, que llama a la funcion de iniciarJuego()
+esta funcion es la encargada de interactuar con las otras funciones principales para generar el juego, tambien 
+se encarga de decirle al usuario lo que tiene que meter y comprobarlo que esta bien, tambien se reinicia el tablero
+revelado a false para cada partida cuando se reinicia el tablero, tambien llama al generarTablero() que
+tendra las caracteristicas que haya puesto el usaurio y por ultimo mostrara el tablero en pantalla, usando
+innerHtml para no cargarnos el script.
+
+Vale, hasta aqui donde interactua el usuario, ahora las partes tecnicas como:
+    -Generacion del tablero
+    -Revelacion del tablero
+    -Mostrar tablero
+    -Y la mas compleja a mi parecer, actualizacion del tablero.
+
+Vamos por partes.
+
+1- Generacion del tablero. (Trabajamos con el tablero REAL, el que no ve el usuario)
+    Es una funcion a la que se le introducira el numero de filas, columnas y minas.
+    Esta funciona con un array bidimensional para las filas y columnas, a las que primero
+    se le asigna todos los lugares a 0 y luego las minas de forma aleatoria comprobando que 
+    no haya una puesta ya en el lugar aleatorio cada vez que se ponga una mina, se sumará y 
+    los lugares de alrededor de la mina sumaran lugar+1, es decir si, hay una mina en la posicion 
+    3,4, se sumara en la posicion de los alrededores el numero que haya +1, para indicar que por 
+    el alrededor de esa casilla hay 1 mina o varias. Obviamente hay una pequeña comprobacion para
+    saber si se sale del tablero, indicando los limites del tablero segun lo que haya puesto el usuario.
+
+2- Mostrar tablero. (Trabajamos con el tablero REVELADO, el que ve el usuario y con el que interactua).
+    Este tablero es importante ya que generara el tablero que tiene botones llamando a la funcion actualizarTablero
+    con la fila y columna que le pertenece a cada uno UNICAMENTE SI LA CELDA ESTA EN tablero REVELADO false, si
+    está en true, muestra el valor es decir el numero, 1,2,3,4... o bomba.
+    Esta funcion trabaja con un simple string al que le vamos a ir añadiendo contenido de la tabla para crearla
+    y una vez creada pues la mostraremos usando el innerHTML.
+
+
+3- Revelar tablero. (Trabajamos generando un tablero con los datos del tablero REAL)
+    En esta funcion es como la de mostrar tablero pero simplemente en vez de poner los botones
+    mostraremos los valores que estan en el tablero real.
+
+4- Actualizar Tablero. (Trabajamos con el tablero REVELADO y con la funcion mostrar tablero).
+    Esta funcion tiene varias utilidades:
+        1- Poner el true la celda a la que el usuario ha hecho click, y luego llama a la funcion mostrar tablero,
+        que muestra el tablero con botones si es false o si es true el valor.
+        2- Comprueba si la celda a la que el usuario ha hecho click es bomba o no, si es bomba revela el tablero
+        y muestra que el usuario ha perdido.
+        3- Comprueba si la celda a la que ha hecho click el usuario tiene el valor de 0 y si tiene el valor de 0,
+        se llama de forma recursiva para las columnas y filas abyacentes
+        para mostrar las celdas de alrededor hasta que llegue a un valor que no sea 0,
+        es decir, hasta que llegue a un valor numerico > 0.
+        4- Comprueba que todas las celdas que no ha sido minadas han sido descubiertas para decir si el jugador
+        ha ganado o no
+    Es la encargada de la interatuabilidad del usaurio con el juego, llamandose de forma recursiva para poner celdas a true,
+    y llamando a otra funcion para mostrarselo al usuario tras las comprobaciones.
+
