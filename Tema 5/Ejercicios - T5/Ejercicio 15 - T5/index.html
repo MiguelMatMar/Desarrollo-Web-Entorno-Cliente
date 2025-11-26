@@ -6,8 +6,38 @@
     <title>Document</title>
 </head>
 <body>
+    <p id="mostrar"></p><br>
+    <button onclick="hora()">Hora</button>
+    <button onclick="diaSemana()">Dia Semana</button>
+    <button onclick="diaMes()">Dia Mes</button>
+    <button onclick="mes()">Mes</button>
+    <button onclick="year()">Año</button>
+    <button onclick="fechaLocal()">Fecha Local</button>
     <script>
-        
+        let date = new Date;
+
+        function hora(){
+            document.getElementById('mostrar').innerHTML = `Hora: ${date.getHours()}`;
+        }
+        function diaSemana(){
+            let numeroDiaSemana = date.getUTCDay();
+            let dias = ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'];
+            document.getElementById('mostrar').innerHTML = `Dia de la Semana: ${dias[numeroDiaSemana]}`;
+        }
+        function diaMes(){
+            document.getElementById('mostrar').innerHTML = `Dia del mes: ${date.getDate()}`;
+        }
+        function mes(){
+            let numeroMes = date.getUTCMonth();
+            let meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+            document.getElementById('mostrar').innerHTML = `Mes: ${meses[numeroMes]}, ${numeroMes+1}`;
+        }
+        function year(){
+            document.getElementById('mostrar').innerHTML = `Año: ${date.getFullYear()}`;
+        }
+        function fechaLocal(){
+            document.getElementById('mostrar').innerHTML = `Fecha Local: ${date.toLocaleString()}`;
+        }
     </script>
 </body>
 </html>

@@ -6,8 +6,20 @@
     <title>Document</title>
 </head>
 <body>
+    <button onclick="parar(1)">¡Para!</button>
+    <p id="tiempo"></p>
     <script>
+
+        let mostrarHora = setInterval(mostrarTiempo,1000);
         
+        function parar(t){
+            setTimeout( () => clearInterval(mostrarHora) ,t )
+        }
+        function mostrarTiempo(){
+            let fecha = new Date;
+            document.getElementById('tiempo').innerHTML = `Tiempo: ${fecha.toLocaleTimeString()}`
+        }
+
     </script>
 </body>
 </html>

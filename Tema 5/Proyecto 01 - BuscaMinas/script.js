@@ -132,6 +132,7 @@ function iniciarJuego() {
     if (isNaN(columnas) || columnas < 5) columnas = 10;
     if (isNaN(numMinas) || numMinas < 1) numMinas = 5;
 
+    // Si el numero de minas es mayor al numero de filas y columnas entonces que le salga un error al usuario
 
     // Inicializa el tableroRevelado (con la configuracion del tablero del usuario), son 2 tableros diferentes, uno para el juego (con las minas etc) y otro para mostrar las celdas reveladas al usuario, inicialmente todas las celdas son falsas (no reveladas)
     for (let i = 0; i < filas; i++) {

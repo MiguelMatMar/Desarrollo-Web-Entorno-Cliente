@@ -7,7 +7,17 @@
 </head>
 <body>
     <script>
+
+        let mostrarHora = setInterval(mostrarTiempo,1000);
         
+        function parar(t){
+            setTimeout( () => clearInterval(mostrarHora) ,t )
+        }
+        function mostrarTiempo(){
+            let fecha = new Date;
+            document.getElementById('tiempo').innerHTML = `Tiempo: ${fecha.toLocaleTimeString()}`
+        }
+
     </script>
 </body>
 </html>
