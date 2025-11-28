@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es-es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practica 03 - T6 - Miguel Mateo Marquez</title>
+</head>
+<body>
+
+    <button onclick="redirigirGoogle()">¡¡ Nos vamos !!</button>
+    <script>
+        /*
+            Crear una página que, dependiendo de si pulsamos un botón o no, nos redirija a una
+            página o a otra. 
+
+
+            ➢ La página mostrará el botón ¡¡Nos vamos!!. Al ser pulsado nos redirigirá al
+            buscador de Google.
+            ➢ En caso de no pulsarlo, cuando pasen 5 segundos nos redirigirá al buscador de
+            duckduckgo.
+
+
+            ➢ Para controlar el delay nos hará falta un método que controle el tiempo transcurrido
+            en la página y que ya vimos en prácticas anteriores.
+            ➢ Recuerda que, como argumento, le hará falta una función callback (normal o
+            anónima).
+
+            ➢ Una página u otra
+
+
+            ➢ Por plataforma Classroom como <Nombre y apellidos>_PRACTICA03T6EVA2.
+        */
+        
+        function redirigirGoogle(){ // Funcion que se llama con el boton
+            location.href = 'https://www.google.com';
+        }
+        
+        setInterval(() => location.href = 'https://duckduckgo.com/',5000) // Funcion anonima que se llama a los 5 segundos de estar en la pagina sin hacer nada
+    
+    </script>
+    
+</body>
+</html>
