@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es-es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 9</title>
+</head>
+<body>
+    <section id="s1">
+        <h1>Titulo</h1>
+        <p>Ejemplo de documento <strong>Dom</strong> vision en arbol</p>
+    </section>
+    <section id="s2">
+        <p>Aqui solo hay texto</p>
+    </section>
+    <script>
+        let secc = document.getElementById("s1"); //Referencia al elemento s1
+        console.log (secc); //Lista los métodos y propiedades del elemento secc.
+        secc.innerHTML = "<h1>HOLA</h1>"; // Puedes introducir elementos HTML en el DOM
+        secc.innerText = "hola"; // Unicamente puedes introducir texto simple en el DOM, sin ninguna etiqueta
+    </script>
+</body>
+</html>
