@@ -21,7 +21,14 @@
     <p id="resultado"></p>
     <script>
         // Ejercicio 13
-        
+        let verdura = document.getElementsByClassName('verdura');
+        let legumbre = document.getElementsByClassName('legumbre');
+        let carne = document.getElementsByClassName('carne');
+        for (const element of legumbre) {
+            if(element.innerHTML == "Lentejas"){
+                console.log(element.innerHTML);
+            }
+        }
     </script>
 </body>
 </html>
