@@ -7,13 +7,25 @@
 </head>
 <body>
     <input type="text" value="Escribe aqui...">
-    <button onclick="soloLee()">Solo lectura</button>
+    <button onclick="soloLee()">Solo Lectura</button>
     <script>
         let entrada = document.querySelector("input");
+        let button = document.querySelector('button');
+        console.log(button)
         function soloLee(){
+            
             entrada.toggleAttribute("readonly");
-            entrada.
+            entrada.setAttribute('value', "No se permite escritura")
+            button.firstChild.textContent = "Lectura/Escritura";
+            button.setAttribute('onclick', 'escribe()');
         }
+        function escribe(){
+            entrada.removeAttribute("readonly");
+            entrada.setAttribute('value', "Escribe aqui...");
+            button.firstChild.textContent = "Solo Lectura";
+            button.setAttribute('onclick', 'soloLee()');
+        }
+
     </script>
 </body>
 </html>
