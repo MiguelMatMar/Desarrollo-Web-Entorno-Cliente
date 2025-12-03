@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" value="Escribe aqui...">
+    <button onclick="soloLee()">Solo lectura</button>
+    <script>
+        let entrada = document.querySelector("input");
+        function soloLee(){
+            entrada.toggleAttribute("readonly");
+        }
+    </script>
+</body>
+</html>
