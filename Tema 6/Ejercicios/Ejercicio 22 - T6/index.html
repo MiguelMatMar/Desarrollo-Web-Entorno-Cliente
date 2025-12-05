@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .clase1{
+            color: yellow;
+        }
+        .clase2{
+            font-size: 30px;
+        }
+        .clase3{
+            background-color: orangered;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>¡¡Transfórmame!!</p>
+    </div>
+    <button onclick="ponerEstilos()">Convertir</button>
+    <button onclick="quitarEstilos()">Resetear</button>
+    <button onclick="intercambiarEstilos()">Intercambiar</button>
+
+    <script>
+        let clasesElement = document.querySelector('div').getElementsByTagName('p')[0].classList;
+        console.log(clasesElement)
+        let clases = ['clase1','clase2','clase3'];
+
+        function ponerEstilos(){
+            for (const element of clases) {
+                clasesElement.add(element);
+            }
+        }
+        function quitarEstilos(){
+            for (const element of clases) {
+                clasesElement.remove(element);
+            }
+        }
+        function intercambiarEstilos(){
+            if(clasesElement.length === 0){
+                for (const element of clases) {
+                    clasesElement.add(element);
+                }
+            }else{
+                for (const element of clases) {
+                    clasesElement.remove(element);
+                }
+            }
+        }
+
+    </script>
+
+</body>
+</html>
