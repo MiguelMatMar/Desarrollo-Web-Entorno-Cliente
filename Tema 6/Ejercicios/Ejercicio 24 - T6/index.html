@@ -14,7 +14,18 @@
     </section>
 
     <script>
-        let elemento = document.getElementById('parrafo1')
+        let parrafo1 = document.getElementById('s1');
+        // 1.
+        console.log(`Nodos seccion 1: ${parrafo1.childNodes.length}`);
+        // 2
+        console.log(`Hijos seccion 1: ${parrafo1.childElementCount}`);
+        // 3. 
+        let el1 = parrafo1.firstChild;
+        console.log(`Primer elemento hijo de la seccion 1 ${el1.nodeValue}`);
+        // 4. 
+        console.log(`Nombre del primer elemento hio de la seccion 1 ${el1.nodeName}`)
+        // 5.
+        
     </script>
 </body>
 </html>
