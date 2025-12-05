@@ -35,14 +35,13 @@
                     element.style.color = "orange";
                 }
                 else if(element.className === 'verdura'){
-                    if(negritas.includes(element.innerText.toLowerCase())){
-                        element.style.fontWeight = "700";
-                    }else{
-                        element.style.color = "green";
-                    }
+                    element.style.color = "green";
                 }
                 else{
                     element.style.color = "grey";
+                }
+                if(negritas.includes(element.innerText.toLowerCase())){
+                    element.style.fontWeight = "700";
                 }
             }
         }
