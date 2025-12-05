@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bloqueado{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Titulo</h1>
+    <p>Ejemplo de texto de documento <strong>DOM</strong>. Vision en do de hola</p>
+    <p>Aqui solo hay vaca de la vaca</p>
+    <button onclick="bloquearContenido()">Censurado</button>
+
+    <script>
+        let bodyDocumento = document.querySelector('body');
+        let palabrasBloqueadas = ['sexo','caca','culo','pedo','pis'];
+        let textoBloqueado = "<span class='bloqueado'> Censura </span>";
+
+        function bloquearContenido(contenido = bodyDocumento){
+            let comprobacionBloc = false; // Se usa para comprobar si se ha censurado alguna palabra. Si al finalizar sigue en false, se muestra un alert.
+
+            function procesarNodo(nodo) { // Función recursiva que analiza cada nodo del DOM y sus hijos.
+
+                if (nodo.nodeType === 3) { // Para analizar los textos
+                    let texto = nodo.textContent; // Obtenemos el contenido
+                    let original = texto; // Lo guardamos en una segunda variable
+
+                    palabrasBloqueadas.forEach(p => { // Nos metemos en el array de bloqueados y buscamos si en el texto de la pagina coincide con algun elemento del array
+                        if (texto.includes(p)) {
+                            // Si coincide se remplaza por el texto bloqueado y se marca la casilla de comprobacion
+                            texto = texto.replaceAll(p, textoBloqueado);
+                            comprobacionBloc = true; 
+                        }
+                    });
+
+                    if (texto !== original) { // Si el texto del nodo ha cambiado (se ha censurado alguna palabra)
+                        let span = document.createElement("span"); // se crea un contenedor para poder insertar HTML
+                        span.innerHTML = texto; // Asigna el contenido censurado al span.
+                        nodo.replaceWith(span); // reemplaza el nodo de texto original por el nuevo span.
+                        // En resumen, si el texto cambio, creamos un span con el texto censurado y reemplazamos el nodo original.
+                    }
+
+                    return; // Terminamos el procesamiento de este nodo de texto y no revisamos hijos
+                }
+
+                nodo.childNodes.forEach(hijo => procesarNodo(hijo)); // Llamada recursiva para procesar todos los nodos hijos del nodo actual.
+            }
+
+            procesarNodo(contenido); // Inicia el procesamiento recursivo desde el nodo indicado (el body por defecto).
+
+            if (!comprobacionBloc) {
+                alert("No se encontró nada para censurar.");
+            }
+        }
+    </script>
+
+</body>
+</html>
