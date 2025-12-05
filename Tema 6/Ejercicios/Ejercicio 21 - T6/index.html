@@ -26,6 +26,7 @@
         let classLegumbre = document.getElementsByClassName('legumbre');
 
         function colorearTexto(objeto){
+            let negritas = ['remolacha','tomates']
             for (const element of objeto) {
                 if(element.className === 'carne'){
                     element.style.color = "red";
@@ -34,7 +35,7 @@
                     element.style.color = "orange";
                 }
                 else if(element.className === 'verdura'){
-                    if(element.innerText.toLowerCase() === 'remolacha' || element.innerText.toLowerCase() === "tomates"){
+                    if(negritas.includes(element.innerText.toLowerCase())){
                         element.style.fontWeight = "700";
                     }else{
                         element.style.color = "green";
