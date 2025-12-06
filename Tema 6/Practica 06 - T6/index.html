@@ -6,25 +6,22 @@
     <title>Document</title>
 </head>
 <body>
-    <p id="textoContador"></p>
+    <h1 id="textoContador"></h1>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam officiis sint, deserunt eveniet vitae omnis repellendus quam, consequatur optio, fugiat nostrum beatae repudiandae enim id reiciendis nihil neque. Voluptatem, impedit</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui perferendis blanditiis explicabo omnis magni, quisquam beatae ea neque molestias accusamus voluptatem, aliquid optio, eveniet dignissimos officiis natus aut iusto pariatur. </p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui perferendis blanditiis explicabo omnis magni, quisquam beatae ea neque molestias accusamus voluptatem, aliquid optio, eveniet dignissimos officiis natus aut iusto pariatur.   </p>
     <script>
         let lugarTexto = document.getElementById('textoContador');
         let bodyDocumento = document.querySelector('body');
         let contadorTexto = 0;
 
         function contarTexto(contenido = bodyDocumento){
-            // Hay que filtrar para unicamente afectar al texto no al script
-            
-            console.log(contenido.childNodes);
             function procesarNodo(nodo){
                 console.log(nodo.nodeName)
-                if (nodo.nodeType === 3){
+                if (nodo.nodeName == "P"){ // Filtramos unicamente para los parrafos
                     let texto = nodo.textContent;
-                    if(texto.trim() != ""){ // Filtramos para no iterar sobre los textos vacios
-                        //console.log(texto.split(" ").length) // Convertimos el texto a array y contamos su longitud
-                        contadorTexto += texto.split(" ").length;
+                    if(texto.trim() != " "){ // Filtramos para no iterar sobre los textos vacios
+                        console.log(texto.trim().split(" ")) // Convertimos el texto a array y contamos su longitud
+                        contadorTexto += texto.trim().split(" ").length;
                     }
                     
                     return;
@@ -35,7 +32,7 @@
             procesarNodo(contenido);
         }
         contarTexto();
-        lugarTexto.innerText = contadorTexto;
+        lugarTexto.innerHTML = `Hay un total de ${contadorTexto} palabras en estos parrafos.`;
     </script>
 </body>
 </html>
