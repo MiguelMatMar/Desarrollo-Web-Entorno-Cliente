@@ -8,34 +8,60 @@
 <body>
     <h1 id="textoContador"></h1>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam officiis sint, deserunt eveniet vitae omnis repellendus quam, consequatur optio, fugiat nostrum beatae repudiandae enim id reiciendis nihil neque. Voluptatem, impedit</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui perferendis blanditiis explicabo omnis magni, quisquam beatae ea neque molestias accusamus voluptatem, aliquid optio, eveniet dignissimos officiis natus aut iusto pariatur.   </p>
+    <p>  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui perferendis blanditiis explicabo omnis magni, quisquam beatae ea neque molestias accusamus voluptatem, aliquid optio, eveniet dignissimos officiis natus aut iusto pariatur.   </p>
     
     <script>
         let lugarTexto = document.getElementById('textoContador');
         let bodyDocumento = document.querySelector('body');
         let contadorTexto = 0;
+        let contadorEspacios = 0;
 
-        function contarTexto(contenido = bodyDocumento){
-            function procesarNodo(nodo){
-                if (nodo.nodeName == "P"){ // Filtramos unicamente para los parrafos
-                    let texto = nodo.textContent;
-                    if(texto.trim() != " "){ // Filtramos para no iterar sobre los textos vacios
-                        for (const element of texto.trim().split(" ")) { // Vamos a recorrer cada elemento del array y le quitamos los espacios a cada palabra
-                            if(element.trim() != ""){ // Filtramos para no contar los espacios vacios del array
-                                contadorTexto++;
+        /* Mi manera contando palabras
+            function contarTexto(contenido = bodyDocumento){
+                function procesarNodo(nodo){
+                    if (nodo.nodeName == "P"){ // Filtramos unicamente para los parrafos
+                        let texto = nodo.textContent;
+                        if(texto.trim() != " "){ // Filtramos para no iterar sobre los textos vacios
+                            for (const element of texto.trim().split(" ")) { // Vamos a recorrer cada elemento del array y le quitamos los espacios a cada palabra
+                                if(element.trim() != ""){ // Filtramos para no contar los espacios vacios del array
+                                    contadorTexto++;
+                                }
                             }
+                            // contadorTexto += texto.trim().split("").length; Sirve pero cuenta los espacios vacios
                         }
-                        // contadorTexto += texto.trim().split("").length; Sirve pero cuenta los espacios vacios
+                        return;
                     }
-                    return;
+                    
+                    nodo.childNodes.forEach(hijo => procesarNodo(hijo));
                 }
-                
-                nodo.childNodes.forEach(hijo => procesarNodo(hijo));
+                procesarNodo(contenido);
             }
-            procesarNodo(contenido);
+            contarTexto();
+        */
+
+        function contarPalabras() {
+            let totalPalabras = 0;
+            const parrafos = document.querySelectorAll("p");
+
+            parrafos.forEach(p => {
+                // 1. Eliminar espacios antes y después
+                let texto = p.textContent.trim();
+
+                // 2. Convertir espacios dobles o más en uno solo
+                texto = texto.replace(/\s+/g, " ");
+
+                // 3. Contar espacios → número de palabras = espacios + 1
+                if (texto.length > 0) {
+                    let numEspacios = texto.split(" ").length - 1;
+                    totalPalabras += numEspacios + 1;
+                }
+            });
+
+            return totalPalabras;
         }
-        contarTexto();
-        lugarTexto.innerHTML = `Hay un total de ${contadorTexto} palabras en estos parrafos.`;
+
+        let total = contarPalabras();
+        document.getElementById("textoContador").innerHTML = `<b>Hay un total de ${total} palabras en estos párrafos.</b>`;
     </script>
 </body>
 </html>
