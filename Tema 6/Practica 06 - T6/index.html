@@ -9,6 +9,7 @@
     <h1 id="textoContador"></h1>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam officiis sint, deserunt eveniet vitae omnis repellendus quam, consequatur optio, fugiat nostrum beatae repudiandae enim id reiciendis nihil neque. Voluptatem, impedit</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui perferendis blanditiis explicabo omnis magni, quisquam beatae ea neque molestias accusamus voluptatem, aliquid optio, eveniet dignissimos officiis natus aut iusto pariatur.   </p>
+    
     <script>
         let lugarTexto = document.getElementById('textoContador');
         let bodyDocumento = document.querySelector('body');
@@ -16,14 +17,16 @@
 
         function contarTexto(contenido = bodyDocumento){
             function procesarNodo(nodo){
-                console.log(nodo.nodeName)
                 if (nodo.nodeName == "P"){ // Filtramos unicamente para los parrafos
                     let texto = nodo.textContent;
                     if(texto.trim() != " "){ // Filtramos para no iterar sobre los textos vacios
-                        console.log(texto.trim().split(" ")) // Convertimos el texto a array y contamos su longitud
-                        contadorTexto += texto.trim().split(" ").length;
+                        for (const element of texto.trim().split(" ")) { // Vamos a recorrer cada elemento del array y le quitamos los espacios a cada palabra
+                            if(element.trim() != ""){ // Filtramos para no contar los espacios vacios del array
+                                contadorTexto++;
+                            }
+                        }
+                        // contadorTexto += texto.trim().split("").length; Sirve pero cuenta los espacios vacios
                     }
-                    
                     return;
                 }
                 
