@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section id="s1">
+        <h1>Titulo</h1>
+        <p>Ejemplo de documento <strong>DOM</strong> Vision de arbol</p>
+    </section>
+    <section id="s2">
+        <p>Aqui solo hay texto</p>
+        <p id="introducirTexto"></p>
+    </section>
+    <script>
+
+        let docEntero = document.querySelector('html');
+        let introducirTexto = document.getElementById('introducirTexto');
+        let textoEscribir = "";
+
+        function mostrarElementosDoc(documento = docEntero) {
+
+            function mostrarNodos(nodo) {
+                
+                if (nodo.nodeType === 1) { // Para no mostrar los #text
+                    let nombreNodo = nodo.nodeName;
+
+                    // Mostrar el nombre del nodo
+                    textoEscribir += `<br>${nombreNodo} ->`;
+
+                    // Mostrar atributos
+                    if (nodo.attributes && nodo.attributes.length > 0) {
+                        for (const atributo of nodo.attributes) {
+                            textoEscribir += ` ${atributo.name}="${atributo.value}"`;
+                        }
+                    }
+
+                    textoEscribir += "";
+                }
+
+                nodo.childNodes.forEach(hijo => mostrarNodos(hijo));
+            }
+
+            mostrarNodos(documento);
+            return textoEscribir;
+        }
+
+
+        introducirTexto.innerHTML = mostrarElementosDoc();
+
+    </script>
+</body>
+</html>
