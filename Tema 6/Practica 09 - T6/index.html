@@ -3,25 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tabla dinámica</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <input type="text" id="texto">
     <button onclick="otraFila()">Añadir fila</button>
-    <br>
+    <br><br>
+
     <table>
         <thead>
-            <tr><th>Contenido</th><th>Operación1</th><th>Operación2</th></tr>
+            <tr>
+                <th>Contenido</th>
+                <th>Operación1</th>
+                <th>Operación2</th>
+            </tr>
         </thead>
         <tbody id="bodyTabla">
-            <tr id="fila1">
-                <td>Ejemplo de contenido</td>
-                <td><button>Mayúsculas</button></td>
-                <td><button>Formato chachi</button></td>
+            <tr>
+                <td class="contenido">Ejemplo de contenido</td>
+                <td><button onclick="alternarMayusculas(this)">Mayúsculas</button></td>
+                <td><button onclick="alternarChachi(this)">Formato chachi</button></td>
             </tr>
         </tbody>
     </table>
-    <script src="./script.js"></script>
+
+    <script src="script.js"></script>
 </body>
 </html>
