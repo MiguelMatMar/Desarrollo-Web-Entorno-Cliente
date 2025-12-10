@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ol>
+        <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam tempora suscipit sequi eum placeat voluptatem dolorem quos. Voluptatibus ducimus est, laborum sint fugiat exercitationem sequi sunt ex illum cum placeat!</li>
+        <li>Quidem minima recusandae odit nostrum quas voluptates officia ullam vero, magni delectus molestiae ex velit ratione et dolore tenetur a sequi in dicta provident omnis? Hic perferendis dicta mollitia porro!</li>
+        <li>Earum magnam veniam explicabo neque, cumque dolores natus ea accusantium vitae iure enim nulla porro quidem error dolore minus rerum expedita aut quisquam deleniti necessitatibus asperiores obcaecati. Aperiam, iusto tempore.</li>
+        <li>Cumque accusamus id consectetur ut deserunt dolor? Odit ea in neque molestias non est tempore ducimus dolorem, illo labore nihil dignissimos vel modi dolore vitae veniam facere ut reiciendis dicta!</li>
+        <li>Molestiae quod ab accusamus cumque, amet necessitatibus reprehenderit facere voluptate! Libero quae ex soluta enim quidem labore eius suscipit perferendis saepe, natus tenetur sint dolorem eum a, dolores odio odit.</li>
+        <li>Sequi nam deleniti eligendi eaque adipisci magni ea esse, sint ducimus illo facere ipsum iste voluptatum odio nulla voluptate earum. Odit placeat totam pariatur ut reiciendis beatae magnam repudiandae ab.</li>
+        <li>Doloribus autem iure nihil explicabo sint cumque molestiae sunt tempora? Eaque veritatis enim deserunt minima amet nulla repellat unde nemo inventore blanditiis? Quos, quaerat illum error dolorem enim iusto magni!</li>
+        <li>Perferendis eaque earum veniam, molestiae perspiciatis soluta sint. Sequi pariatur incidunt saepe praesentium temporibus vel labore. Odio dolor velit excepturi exercitationem, iste doloribus expedita quo provident, aliquid nisi incidunt quia.</li>
+        <li>Optio tempora tempore, officiis alias possimus quis, facilis quod sunt in quaerat ratione. Tempore nostrum sequi qui beatae, porro sit ipsa quos quibusdam dolor voluptas et animi odit aliquid corrupti.</li>
+    </ol>
+    <script>
+        do{
+            let documento = document.getElementsByTagName('ol')[0];
+            let textoUsr = prompt("Dime el texto que quieres insertar: ").trim();
+            let numero = parseInt(prompt("En que fila quieres insertarlo: "));
+            if(numero < 0 || numero > document.querySelectorAll('ol li').length){
+                alert("Lo que has insertado esta mal, intentalo de nuevo")
+            }
+            let nuevoli = document.createElement('li');
+            nuevoli.innerText=textoUsr;
+            let fila = document.querySelectorAll('ol li')[numero].innerHTML;
+            console.log(fila);
+            documento.insertBefore(fila,nuevoli);
+
+        }while(isNan(textoUsr) || isNan(numero));
+    </script>
+</body>
+</html>
