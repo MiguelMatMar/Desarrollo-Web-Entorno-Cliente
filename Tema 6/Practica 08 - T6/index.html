@@ -23,13 +23,13 @@
             let textoUsr = prompt("Dime el texto que quieres insertar: ").trim();
             let numero = parseInt(prompt("En que fila quieres insertarlo: "));
             if(numero < 0 || numero > document.querySelectorAll('ol li').length){
-                alert("Lo que has insertado esta mal, intentalo de nuevo")
+                alert("El numero tiene que estar en el rango de filas, intentalo de nuevo")
             }
             let nuevoli = document.createElement('li');
             nuevoli.innerText=textoUsr;
-            let fila = document.querySelectorAll('ol li')[numero].innerHTML;
+            let fila = document.querySelectorAll('ol li')[numero];
             console.log(fila);
-            documento.insertBefore(fila,nuevoli);
+            documento.insertBefore(nuevoli,fila);
 
         }while(isNan(textoUsr) || isNan(numero));
     </script>
