@@ -30,3 +30,14 @@ button{
     padding: 3px;
     border-radius: 5px;
 }
+.campoVacio{
+    margin: 5px auto;
+    text-align: center;
+    background-color: red;
+    width: 50%;
+    color: white;
+}
+
+.hidden {
+    display: none;
+}

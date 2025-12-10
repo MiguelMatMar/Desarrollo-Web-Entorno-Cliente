@@ -1,9 +1,15 @@
 function otraFila() {
     let texto = document.getElementById("texto").value.trim();
+    let error = document.getElementById('textoError');
 
     if (texto === "") {
-        alert("El campo no puede estar vacío.");
+        
+        error.innerHTML = "Error. Campo vacío";
+        error.classList.add('campoVacio');
+        error.classList.remove('hidden'); 
         return;
+    } else {
+        error.classList.add('hidden');  
     }
 
     let tabla = document.getElementById("bodyTabla");
