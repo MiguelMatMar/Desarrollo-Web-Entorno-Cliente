@@ -1,0 +1,10 @@
+*{
+    box-sizing: border-box;
+    margin: 1% auto;
+    padding: 0;
+    text-align: center;
+}
+td, th{
+    border: 2px solid black;
+    padding: 5px;
+}
