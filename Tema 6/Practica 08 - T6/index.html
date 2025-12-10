@@ -18,20 +18,45 @@
         <li>Optio tempora tempore, officiis alias possimus quis, facilis quod sunt in quaerat ratione. Tempore nostrum sequi qui beatae, porro sit ipsa quos quibusdam dolor voluptas et animi odit aliquid corrupti.</li>
     </ol>
     <script>
+        let textoUsr;
+        let numero;
+        let documento = document.getElementsByTagName('ol')[0];
         do{
-            let documento = document.getElementsByTagName('ol')[0];
-            let textoUsr = prompt("Dime el texto que quieres insertar: ").trim();
-            let numero = parseInt(prompt("En que fila quieres insertarlo: "));
-            if(numero < 0 || numero > document.querySelectorAll('ol li').length){
-                alert("El numero tiene que estar en el rango de filas, intentalo de nuevo")
+
+            textoUsr = prompt("Dime el texto que quieres insertar: ");
+
+            if (textoUsr === null) {
+                alert("Has cancelado la aplicación.");
+                break;
             }
+            textoUsr = textoUsr.trim();
+            if (textoUsr === "") {
+                alert("El texto no puede estar vacío.");
+                continue;
+            }
+
+            numero = prompt("En que fila quieres insertarlo (1-10): ");
+
+            if (numero === null) {
+                alert("Has cancelado la aplicación.");
+                break;
+            }
+            numero = parseInt(numero)
+
+            if (isNaN(numero) || numero < 1 || numero > 10) {
+                alert("Debes introducir un número entre 1 y 10.");
+                continue;
+            }
+
             let nuevoli = document.createElement('li');
-            nuevoli.innerText=textoUsr;
-            let fila = document.querySelectorAll('ol li')[numero];
-            console.log(fila);
+            nuevoli.innerHTML=`<strong> ${textoUsr} </strong>`;
+
+            let fila = document.querySelectorAll('ol li')[numero-1];
+
             documento.insertBefore(nuevoli,fila);
 
-        }while(isNan(textoUsr) || isNan(numero));
+            break;
+        }while(true);
     </script>
 </body>
 </html>
