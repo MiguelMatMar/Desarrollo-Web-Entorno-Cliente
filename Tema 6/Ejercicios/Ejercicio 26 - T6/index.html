@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .cuartoParrafo{
+            font-style: italic;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <main id="principal">
+        <p>Soy el primer parrafo</p>
+        <p>Soy el segundo parrafo</p>
+        <p>Soy el tercer parrafo</p>
+    </main>
+    <script>
+        let main = document.getElementById('principal');
+
+        let parrafoNuevo = document.createElement('p');
+        parrafoNuevo.innerText = "Soy el cuarto parrafo";
+        parrafoNuevo.classList.add('cuartoParrafo');
+
+        main.appendChild(parrafoNuevo)
+
+        let parrafos = document.querySelectorAll('#principal p');
+        let arrayParrafos = [];
+
+        for(let numParrafo = 0; numParrafo < parrafos.length; numParrafo++){
+            arrayParrafos.push(parrafos[numParrafo]);
+        }
+
+        arrayParrafos.reverse();
+
+        for(let numParrafo = 0; numParrafo < parrafos.length; numParrafo++){
+            main.appendChild(arrayParrafos[numParrafo])
+            
+        }
+        
+    </script>
+</body>
+</html>
