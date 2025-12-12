@@ -10,8 +10,21 @@
     <p id="temp2"></p>
 
     <script>
-        function temp1(mins, sec){
-            
+        function temp(min, ...sec){
+            min = parseInt(min);
+            sec = parseInt(sec);
+            let p = document.getElementById('temp1');
+            let suma = 0;
+
+            if(min < 0 || sec < 0){
+                alert("Los argumentos introducidos no son numeros")
+                return; // Salimos
+            }
+            if(!isNaN(sec)){
+                min = min*60;
+            }
+            suma = min+sec;
+            return suma;
         }
     </script>
 </body>
