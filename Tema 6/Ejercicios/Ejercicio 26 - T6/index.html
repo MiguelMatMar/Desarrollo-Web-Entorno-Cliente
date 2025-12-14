@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .cuartoParrafo{
+            font-style: italic;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <main id="principal">
+        <p>Soy el primer parrafo</p>
+        <p>Soy el segundo parrafo</p>
+        <p>Soy el tercer parrafo</p>
+    </main>
+    <script>
+        // Obtengo el main
+        let main = document.getElementById('principal');
+
+        // Creo el parrafo nuevo que se va a insertar el ultimo, con el atributo cuartoParrafo
+        let parrafoNuevo = document.createElement('p');
+        parrafoNuevo.innerText = "Soy el cuarto parrafo";
+        parrafoNuevo.classList.add('cuartoParrafo');
+
+        // Inserto el nuevo parrafo en el main
+        main.appendChild(parrafoNuevo)
+
+        // Obtengo todos los nodos del main principal
+        let parrafos = document.querySelectorAll('#principal p');
+        let arrayParrafos = []; // Declaro un nuevo array donde se guardaran cada uno de ellos
+
+        for(let numParrafo = 0; numParrafo < parrafos.length; numParrafo++){ // Recorro cada nodo y lo inserto en el array
+            arrayParrafos.push(parrafos[numParrafo]);
+        }
+
+        arrayParrafos.reverse(); // Le doy la vuelta
+
+        for(let numParrafo = 0; numParrafo < parrafos.length; numParrafo++){ // Lo vuelvo a recorrer para insertar en el main y sustituirlos
+            main.appendChild(arrayParrafos[numParrafo])
+            
+        }
+
+    </script>
+</body>
+</html>
