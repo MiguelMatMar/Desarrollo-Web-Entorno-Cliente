@@ -6,26 +6,43 @@
     <title>Document</title>
 </head>
 <body>
-    <p id="temp1"></p>
-    <p id="temp2"></p>
 
     <script>
-        function temp(min, ...sec){
-            min = parseInt(min);
-            sec = parseInt(sec);
-            let p = document.getElementById('temp1');
+        let sec = 30;
+        let min = 5;
+
+        function timer(min,sec = 0){
             let suma = 0;
 
-            if(min < 0 || sec < 0){
-                alert("Los argumentos introducidos no son numeros")
+            if(typeof min !== "number" || min < 0 || typeof sec !== "number" || sec < 0){
+                if(min < 0 || sec < 0){
+                    alert('Los argumentos introducidos son menores a 0.')
+                    return;
+                }
+                alert("Los argumentos introducidos no son numeros.")
                 return; // Salimos
             }
-            if(!isNaN(sec)){
+            min = parseInt(min);
+            sec = parseInt(sec);
+            if(sec != 0){
                 min = min*60;
             }
-            suma = min+sec;
-            return suma;
+            suma = min + sec;
+            let parrafo = document.createElement('p');
+            document.body.appendChild(parrafo)
+
+            let intervalo = setInterval(()=>{
+                parrafo.textContent = suma;
+                if(suma === 0){
+                    clearInterval(intervalo);
+                }
+                suma--;
+            },1000)
         }
+
+        timer(sec);
+        timer(min,sec);
+        
     </script>
 </body>
 </html>
