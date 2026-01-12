@@ -4,22 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        img{
-            position: absolute;
-            transform: translate(-50%, -50%);
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <img src="./Recursos/morty.png" alt="" id="imagen">
-    <script>
-        let img = document.getElementById('imagen');
-        document.addEventListener('mousemove', (x) => {
-            img.style.left= x.pageX + "px";
-            img.style.top = x.pageY + "px";
-
-        })
-    </script>
+    <p id="coordenadas"></p>
+    <img src="./Imagenes/morty.png" alt="" id="imagen">
+    <script src="./script.js"></script>
 </body>
 </html>
