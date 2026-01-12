@@ -7,22 +7,20 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <h1>Contador de visitas</h1>
-
-    <p id="mensaje"></p>
-    <p id="visitas"></p>
-
-    <div id="botones">
-        <button id="aceptar">Aceptar cookies</button>
-        <button id="rechazar">Rechazar cookies</button>
-        <button id="cerrar">Cerrar sesión</button>
+    <p id="textoInformativo"></p>
+    <p id="contadorVisitas"></p>
+    <div id="preguntaCookie">
+        <h1>Esta pagina dice</h1>
+        <p>
+            Esta pagina usa una cookie para almacenar el numero de visitas que hace cada usuario. Si esta conforme con ello, pulse Aceptar. En caso contrario, no se mostraran las visitas.
+        </p>
+        <button id="aceptar" onclick="aceptarCookies()">Aceptar</button>
+        <button id="rechazar" onclick="rechazarCookies()">Rechazar</button>
     </div>
-    
+    <button onclick="cerrarSesion()" id="cerrarSesion">Cerrar Sesion</button>
+
     <script src="./script.js"></script>
-    <script>
-        iniciarAplicacion();
-    </script>
+
     
 </body>
 </html>

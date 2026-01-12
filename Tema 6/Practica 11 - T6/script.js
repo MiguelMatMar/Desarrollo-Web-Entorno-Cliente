@@ -1,74 +1,32 @@
-function iniciarAplicacion() {
-
-    document.getElementById("aceptar").addEventListener("click", aceptarCookies);
-    document.getElementById("rechazar").addEventListener("click", rechazarCookies);
-    document.getElementById("cerrar").addEventListener("click", cerrarSesion);
-
-    if (existeCookie("sesion") === false) {
-        preguntarCookies();
-    } else {
-        gestionarVisitas();
-    }
-}
-
-function preguntarCookies() {
-
-    let respuesta = confirm(
-        "Esta pagina usa una cookie para almacenar el numero de visitas que hace cada usuario. Si esta conforme con ello, pulse Aceptar. En caso contrario, no se mostraran las visitas."
-    );
-
-    if (respuesta === true) {
-        aceptarCookies();
-    } else {
-        rechazarCookies();
-    }
-}
-
-function aceptarCookies() {
+function aceptarCookies(){
     crearCookieSesion("sesion", "true");
-    gestionarVisitas();
+    document.getElementById("cerrarSesion").style.display = "block";
+    document.getElementById("preguntaCookie").style.display = "none";
+    contarVisita();
 }
 
 function rechazarCookies() {
-
     borrarCookie("visitas");
     borrarCookie("sesion");
-
-    document.getElementById("mensaje").textContent =
-        "No se han aceptado las cookies.";
-    document.getElementById("visitas").textContent = "";
+    document.getElementById("preguntaCookie").style.display = "none";
+    document.getElementById("textoInformativo").textContent = "No se han aceptado cookies.";
+    document.getElementById("contadorVisitas").textContent = "";
 }
 
-function gestionarVisitas() {
-
+function contarVisita() {
     let visitas = obtenerCookie("visitas");
-
     if (visitas === null) {
         visitas = 1;
     } else {
         visitas = parseInt(visitas) + 1;
     }
-
-    crearCookie("visitas", visitas, 60 * 60 * 24 * 365);
-
-    document.getElementById("mensaje").textContent =
-        "Cookies aceptadas.";
-    document.getElementById("visitas").textContent =
-        "Numero de visitas: " + visitas;
-}
-
-function cerrarSesion() {
-
-    borrarCookie("sesion");
-
-    document.getElementById("mensaje").textContent =
-        "Sesion cerrada. Recarga la pagina.";
-    document.getElementById("visitas").textContent = "";
+    crearCookie("visitas", visitas, 60*60*24*365);
+    document.getElementById("textoInformativo").textContent = "Cookies aceptadas.";
+    document.getElementById("contadorVisitas").textContent = "Número de visitas: " + visitas;
 }
 
 function crearCookie(nombre, valor, segundos) {
-    document.cookie =
-        nombre + "=" + valor + "; max-age=" + segundos + "; path=/";
+    document.cookie = nombre + "=" + valor + "; max-age=" + segundos + "; path=/";
 }
 
 function crearCookieSesion(nombre, valor) {
@@ -76,14 +34,10 @@ function crearCookieSesion(nombre, valor) {
 }
 
 function obtenerCookie(nombre) {
-
     let cookies = document.cookie.split("; ");
-
     for (let i = 0; i < cookies.length; i++) {
         let partes = cookies[i].split("=");
-        if (partes[0] === nombre) {
-            return partes[1];
-        }
+        if (partes[0] === nombre) return partes[1];
     }
     return null;
 }
@@ -94,4 +48,16 @@ function borrarCookie(nombre) {
 
 function existeCookie(nombre) {
     return obtenerCookie(nombre) !== null;
+}
+
+function cerrarSesion(){
+    borrarCookie("sesion");
+    borrarCookie("visitas");
+    location.reload();
+}
+
+if (existeCookie("sesion")) {
+    document.getElementById("cerrarSesion").style.display = "block";
+    document.getElementById("preguntaCookie").style.display = "none";
+    contarVisita();
 }
