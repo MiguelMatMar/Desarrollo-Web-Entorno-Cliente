@@ -1,4 +1,4 @@
-// script.js
+// Pagina de informacion https://developer.mozilla.org/en-US/docs/Web/API/FileReader
 function iniciaListeners() {
     let inputFile = document.getElementById('myfile');
     inputFile.addEventListener('change', manejarArchivo);
