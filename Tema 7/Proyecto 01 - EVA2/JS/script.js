@@ -1,4 +1,5 @@
 // Pagina de informacion https://developer.mozilla.org/en-US/docs/Web/API/FileReader
+
 function iniciaListeners() {
     let inputFile = document.getElementById('myfile');
     inputFile.addEventListener('change', manejarArchivo);
@@ -12,13 +13,14 @@ function manejarArchivo(event) {
         let archivo = archivos[i];
         let nombre = archivo.name.toLowerCase();
         let acceptados = ['.csv', '.txt', '.lst'];
+        let extension = nombre.substring(nombre.lastIndexOf('.'));
 
         // Solo aceptar csv, txt y lst
-        acceptados.forEach(extension => {
-            if (nombre.endsWith(extension)) {
+       
+            if(acceptados.includes(extension)) {
                 let lector = new FileReader();
                 
-                lector.onload = function(e) {
+                lector.onload = function(e) { // Cuando cargue el archivo vamos a mostrar su contenido
                     let contenido = e.target.result;
 
                     // Crear un elemento para mostrar el contenido
@@ -27,11 +29,10 @@ function manejarArchivo(event) {
                     document.body.appendChild(pre);
                 };
                 
-                lector.readAsText(archivo); // Leer el archivo como texto
+                lector.readAsText(archivo); // Leer el archivo como texto, metodo de FileReader
             } else {
                 console.log(`Archivo ${nombre} no es aceptado.`);
             }
-        });
     }
 }
 
