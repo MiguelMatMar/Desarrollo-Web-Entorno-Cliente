@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100vw;
+        }
+        .cuadradoGris{
+            height: 50%;
+            width: 25%;
+            background-color: grey;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 
+        Crea una aplicación web que contenga un cuadrado gris con unas dimensiones que se ajusten
+        a la mitad de la ventana. Controla hasta tres eventos de ratón interactuando con dicho cuadrado de tal modo
+        que aparezca un mensaje en él comunicando el evento capturado.
+    -->
+
+    <div id="cuadradoGris" class="cuadradoGris"></div>
+    <p id="interacion"></p>
+
+    <script>
+        let cuadradoGris = document.getElementById('cuadradoGris');
+        let interaccion = document.getElementById('interacion');
+
+        cuadradoGris.addEventListener('click',()=>{
+            interaccion.innerText = "El cuadrado se a clickeado.";
+        });
+        cuadradoGris.addEventListener('mouseout',()=>{
+            interaccion.innerText = "Has sacado le raton del cuadrado.";
+        });
+        cuadradoGris.addEventListener('mouseenter',()=>{
+            interaccion.innerText = "El raton ha entrado al cuadrado.";
+        });
+    </script>
+</body>
+</html>
