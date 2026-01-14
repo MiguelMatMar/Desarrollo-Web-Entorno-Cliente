@@ -1,0 +1,18 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+div{
+    height: 50%;
+    width: 25%;
+    border: 1px solid black;
+}
