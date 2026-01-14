@@ -17,3 +17,7 @@ div{
     overflow-y: scroll;
     text-align: justify;
 }
+button{
+    width: 25%;
+    margin-top: 10px;
+}
