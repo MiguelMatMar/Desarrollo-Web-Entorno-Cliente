@@ -1,10 +1,19 @@
 // Pagina de informacion https://developer.mozilla.org/en-US/docs/Web/API/FileReader
 
+
+/**
+ * Inicializa los listeners del input de archivos.
+ * Se ejecuta al cargar la página para preparar el input file.
+ */
 function iniciaListeners() {
     let inputFile = document.getElementById('myfile');
     inputFile.addEventListener('change', manejarArchivo);
 }
 
+
+/**
+ * Maneja los archivos seleccionados en el input file.
+ */
 function manejarArchivo(event) {
     let archivos = event.target.files; // Obtenemos los archivos seleccionados
     if (!archivos || archivos.length === 0) return;
