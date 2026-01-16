@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Mostramos los botones de radio</h1>
+    Código 12
+    <form action="./miPaginaForm.php">
+        <p>Introduzca género</p>
+        <input type="radio" id="masc" name="genero" value="masculino">
+        <label for="masc">Masculino</label><br>
+
+        <input type="radio" id="fem" name="genero" value="femenino">
+        <label for="fem">Femenino</label><br>
+
+        <input type="radio" id="otro" name="genero" value="otro">
+        <label for="otro">Otro</label><br>
+
+        <button type="submit" value="bntEnviar">Enviar</button>
+        <button type="reset" value="btnReinicia">Reset</button>
+    </form>
+
+    <script>
+        let elementosForm = document.getElementsByTagName('form')[0].children;
+        [...elementosForm].forEach(el => console.log(el.nodeName));
+
+    </script>
+</body>
+</html>
