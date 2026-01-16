@@ -1,9 +1,85 @@
+/* Reset básico */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-body{
+
+/* Fondo de la página y centrado */
+body {
     width: 100vw;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: linear-gradient(135deg, #89f7fe, #66a6ff);
+    padding: 50px 20px;
+    overflow-y: auto;
+}
+
+/* Estilo del input de archivos */
+input[type="file"] {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px dashed #ffffffaa;
+    background-color: #ffffff33;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+}
+
+input[type="file"]:hover {
+    background-color: #ffffff55;
+    border-color: #fff;
+}
+
+/* Contenedor de los archivos cargados */
+pre {
+    width: 90%;
+    max-width: 800px;
+    background-color: #ffffffdd;
+    color: #333;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Resaltar el nombre del archivo */
+pre::before {
+    content: attr(data-filename);
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #0077ff;
+}
+
+/* Animación suave al aparecer */
+pre {
+    transform: translateY(20px);
+    opacity: 0;
+    animation: fadeInUp 0.5s forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Scroll para contenido largo */
+pre::-webkit-scrollbar {
+    height: 8px;
+}
+pre::-webkit-scrollbar-thumb {
+    background-color: #0077ff88;
+    border-radius: 4px;
 }
