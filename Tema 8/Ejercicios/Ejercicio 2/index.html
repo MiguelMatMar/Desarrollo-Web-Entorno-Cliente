@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Introduce un texto cualquiera:</p>
+    <input id="entrada" type="text">
+    <button type="button" onclick="comprueba()">Comprobamos input</button>
+    <p id="parrafo"></p>
+    <script>
+        function comprueba() {
+            let m, x;
+            m = document.getElementById("parrafo");
+            m.innerHTML = "";
+            x = document.getElementById("entrada").value; //texto del usuario
+        try {
+            if (x == null) throw "Esta vacio";
+            if (typeof(parseInt(x)) !=="number") throw "No has introducido un numero";
+            if (x > 20) throw "El numero sobrepasa a 20";
+            if (x < 1) throw "El numero es menor que 1";
+
+            m.innerHTML = "Todo bien";
+        } catch (miError) {
+            m.innerHTML = "La entrada es " + miError;
+        }
+    }
+    </script>
+</body>
+</html>
