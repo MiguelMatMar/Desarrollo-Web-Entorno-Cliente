@@ -3,3 +3,33 @@
     padding: 0;
     box-sizing: border-box;
 }
+body, html{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #c1c1c1;
+}
+div{
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    width: 50%;
+    & button{
+        float: right;
+        padding: 1%;
+        border-radius: 10px;
+    }
+}
+#cerrarSesion{
+    background: #f61900;
+    color: #fff;
+    padding: 0.5%;
+    cursor: pointer;
+    display: none;
+}

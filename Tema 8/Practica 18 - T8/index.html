@@ -7,6 +7,22 @@
     <link rel="stylesheet" href="./CSS/style.css">
 </head>
 <body>
-    <script src="./JS/script.js"></script>
+    <script type="module" >
+        import * as cookie from './JS/script.js';
+    </script>
+    <p id="textoInformativo"></p>
+    <p id="contadorVisitas"></p>
+    <div id="preguntaCookie">
+        <h1>Esta pagina dice</h1>
+        <p>
+            Esta pagina usa una cookie para almacenar el numero de visitas que hace cada usuario. Si esta conforme con ello, pulse Aceptar. En caso contrario, no se mostraran las visitas.
+        </p>
+        <button id="aceptar">Aceptar</button>
+        <button id="rechazar" onclick="cookie.rechazarCookies()">Rechazar</button>
+    </div>
+    <button onclick="cookie.cerrarSesion()" id="cerrarSesion">Cerrar Sesion</button>
+    
+
+    
 </body>
 </html>
