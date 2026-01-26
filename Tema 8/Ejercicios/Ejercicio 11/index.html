@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let n = 0;
+        let promesa1 = Promise.resolve("Estoy resuelta").then((mensaje)=> {console.log("Mensaje de la promesa nº1 : "+mensaje)});
+        let promesa2 = new Promise((resolver) => {
+            setTimeout(() => {
+                resolver("Resuelvo en 3s")
+            }, 3000);
+        }).then((mensaje)=> {console.log("Mensaje de la promesa nº2 : "+mensaje)});
+        let promesa3 = new Promise((resolver) => {
+            let intervalo = setInterval(()=>{
+                n++;
+                console.log(n);
+                if(n==5){
+                    clearTimeout(timeout);
+                    clearInterval(intervalo);
+                    throw new Error('Error en la promesa 3, tiempo de espera cumplido');
+                }
+            },1000);
+            
+            let timeout = setTimeout(() => {
+                resolver("Resuelvo en 6s");
+                clearInterval(intervalo);
+            }, 6000);   
+            
+        }).then((mensaje)=>{console.log("Mensaje de la promesa nº3 : "+mensaje)}).catch((error) => {console.log(error)});
+
+        let promesaConjunta = Promise.all([promesa1, promesa2, promesa3]);
+
+        console.log("Empezando");
+
+        promesaConjunta.then((resultados) => {
+            console.log ("las tres promesas se han cumplido");
+        });
+    </script>
+</body>
+</html>
