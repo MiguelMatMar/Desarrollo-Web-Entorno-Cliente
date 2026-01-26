@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let promesa1 = Promise.resolve("Estoy resuelta").then((mensaje)=> {console.log("Mensaje de la promesa nº1 : "+mensaje)});
+        let promesa2 = new Promise((resolver) => {
+            setTimeout(() => {
+                resolver("Resuelvo en 3s")
+            }, 3000);
+        }).then((mensaje)=> {console.log("Mensaje de la promesa nº2 : "+mensaje)});
+        let promesa3 = new Promise((resolver) => {
+            setTimeout(() => {
+                resolver("Resuelvo en 6s")
+            }, 6000);
+        }).then((mensaje)=> {console.log("Mensaje de la promesa nº3 : "+mensaje)});
+
+        let promesaConjunta = Promise.all([promesa1, promesa2, promesa3]);
+
+        console.log("Empezando");
+
+        promesaConjunta.then((resultados) => {
+            console.log ("las tres promesas se han cumplido");
+        });
+    </script>
+</body>
+</html>
