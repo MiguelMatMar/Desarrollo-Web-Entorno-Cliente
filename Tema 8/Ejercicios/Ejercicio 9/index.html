@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        var promesa = new Promise(function(resolver, rechazar){
+            let n=0;
+            let intervalo = setInterval(function(){
+                n++;
+                console.log(promesa);
+                if(n==10){
+                    resolver("Han pasado 10 segundos");
+                    clearInterval(intervalo);
+                }
+            },1000);
+        });
+        promesa.then(function(mensaje){
+            console.log(mensaje);
+            console.log(promesa); 
+        });
+        
+
+    </script>
+</body>
+</html>
