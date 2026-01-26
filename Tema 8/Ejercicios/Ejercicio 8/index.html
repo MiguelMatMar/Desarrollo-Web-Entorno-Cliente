@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        var promesa = new Promise((resolve, reject)=>{
+            let n1 = 4;
+            let n2 = 3;
+            if(n2 == n1){
+                resolve ('Los 2 son iguales');
+            }else if(n2 > n1){
+                resolve ('N2 es mayor a N1');
+            }else{
+                throw new Error("Error: N1 no pude ser mayor a N2");
+            }
+        });
+        promesa.then((respuesta)=>{
+            console.log(respuesta);
+        }).catch((miError)=>{
+            console.log(miError.message);
+        });
+
+    </script>
+</body>
+</html>
