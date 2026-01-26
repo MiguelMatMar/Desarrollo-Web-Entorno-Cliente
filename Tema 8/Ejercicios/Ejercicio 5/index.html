@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var promesa = new Promise((resolve, reject)=>{ /*La promesa tiene como
+        argumento una función callback con, a su vez, dos argumentos: el de
+        éxito (resolver) y el de no éxito (rechazar).*/
+            let n1=2; let n2=2;
+            if(n1==n2)
+                resolve("¡Son iguales!");
+            else
+                reject(Error("Algo raro ha pasado"));
+        });
+        promesa.then((respuesta)=>{ /*El parámetro respuesta recibirá el
+            argumento de resolve, si hubiera un segundo parámetro recibiría el
+            argumento de reject.*/
+            console.log(respuesta);
+        }); //then es un método de la promesa recién creada
+
+        console.log(promesa)
+
+    </script>
+</body>
+</html>
