@@ -82,7 +82,8 @@ function leerArchivo(evento){
             bottonGenerarCSV.id = 'bottonGenerarCSV' + archivo.name;
             document.body.appendChild(bottonGenerarCSV);
             bottonGenerarCSV.addEventListener('click', () => {
-                generarCsv(archivo.name, [contenido]);
+                let valLetras = parseInt(formularioLetrasPalabra.value);
+                generarCsv(archivo.name, contenido, valLetras);
                 console.log(archivo.name);
                 bottonGenerarCSV.disabled = true;
             });
@@ -127,14 +128,16 @@ function cargarDocumentoDOM(array, columnasPorFila, letraPorPalabra) {
  * @param {string} nombreArchivo - Nombre del archivo original
  * @param {Array} arrayContenido - Datos para el CSV
  */
-function generarCsv(nombreArchivo,arrayContenido){
+function generarCsv(nombreArchivo, arrayContenido, letraPorPalabra){
     // Cambiamos las , por enters
-    let contenidoCsv = arrayContenido.map(fila => fila.join(",")).join("\n");
+    let palabrasFiltradas = arrayContenido.filter(palabra => palabra.trim().length === parseInt(letraPorPalabra));
+    let contenidoCsv = palabrasFiltradas.join("\n");
+
     // Creamos el archivo con el contenido previo
     let blob = new Blob([contenidoCsv], { type: 'text/csv;charset=utf-8;' });
 
-    let nombreArchivoSinExtension = nombreArchivo.replace(/\.[^/.]+$/, ""); // Remplazamos todo lo que vaya despues del punto por nada, asi le quitamos la extension
-
+    let nombreArchivoSinExtension = "palabras" + letraPorPalabra;
+    
     // Creamos el link para descargar de forma automatica el documento
     let link = document.createElement("a");
     let url = URL.createObjectURL(blob);
