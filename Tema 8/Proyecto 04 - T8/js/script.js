@@ -37,7 +37,7 @@ function leerArchivo(evento){
             textoLetras.innerText = "¿Letras por palabra?:";
             document.body.appendChild(textoLetras);
             let formularioLetrasPalabra = document.createElement('input');
-            formularioLetrasPalabra.type = 'text';
+            formularioLetrasPalabra.type = 'number';
             formularioLetrasPalabra.id = 'formularioLetrasPalabra' + archivo.name; // Creamos el id unico para cada archivo
             document.body.appendChild(formularioLetrasPalabra);
 
@@ -56,12 +56,15 @@ function leerArchivo(evento){
             botonGenerarTabla.id = 'botonGenerarTabla' + archivo.name;
             document.body.appendChild(botonGenerarTabla);
 
-            if (!letrasPorFila.value) { letrasPorFila.value = 5; } // Por si acaso
+            // Por si acaso
+            if (!letrasPorFila.value) { letrasPorFila.value = 5; } 
+            if(!formularioLetrasPalabra.value){formularioLetrasPalabra.value = 1}
+
+
             // Obtenemos los 2 inputs generados anteriormente para añadirle el evento al boton
             botonGenerarTabla.addEventListener('click', () => {
                 cargarDocumentoDOM(contenido, letrasPorFila.value, formularioLetrasPalabra.value);
                 botonGenerarTabla.disabled = true;
-                botonGenerarTabla.removeEventListener('click');
             });
 
             // Hacemos lo mismo con el otro boton
@@ -71,6 +74,7 @@ function leerArchivo(evento){
             document.body.appendChild(bottonGenerarCSV);
             bottonGenerarCSV.addEventListener('click', () => {
                 generarCsv(archivo.name, [contenido]);
+                console.log(archivo.name);
                 bottonGenerarCSV.disabled = true;
             });
             document.body.appendChild(saltoFila);
@@ -79,14 +83,17 @@ function leerArchivo(evento){
     });
 };
 
-function cargarDocumentoDOM(array,columnasPorFila,letraPorPalabra) {
+function cargarDocumentoDOM(array, columnasPorFila, letraPorPalabra) {
     // Simplemente creamos la tabla
     let nodoTabla = document.createElement('table');
     let contenidoTabla = "<tr>";
     let contadorFilas = 0;
     let cantidadFilas = parseInt(columnasPorFila);
+
+    // Filtramos el array para que solo contenga palabras con la longitud del usuario
+    let palabrasFiltradas = array.filter(palabra => palabra.trim().length === parseInt(letraPorPalabra));
     
-    array.forEach(palabra => {
+    palabrasFiltradas.forEach(palabra => {
         contadorFilas++;
         if(contadorFilas === cantidadFilas){
             contenidoTabla += `<td>${palabra}</td></tr><tr>`;
@@ -107,11 +114,13 @@ function generarCsv(nombreArchivo,arrayContenido){
     // Creamos el archivo con el contenido previo
     let blob = new Blob([contenidoCsv], { type: 'text/csv;charset=utf-8;' });
 
+    let nombreArchivoSinExtension = nombreArchivo.replace(/\.[^/.]+$/, ""); // Remplazamos todo lo que vaya despues del punto por nada, asi le quitamos la extension
+
     // Creamos el link para descargar de forma automatica el documento
     let link = document.createElement("a");
     let url = URL.createObjectURL(blob);
     link.setAttribute("href", url);
-    link.setAttribute("download", nombreArchivo.endsWith(".csv") ? nombreArchivo : nombreArchivo + ".csv");
+    link.setAttribute("download", nombreArchivoSinExtension.endsWith(".csv") ? nombreArchivoSinExtension : nombreArchivoSinExtension + ".csv");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
