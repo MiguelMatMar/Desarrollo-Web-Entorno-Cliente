@@ -56,14 +56,18 @@ function leerArchivo(evento){
             botonGenerarTabla.id = 'botonGenerarTabla' + archivo.name;
             document.body.appendChild(botonGenerarTabla);
 
-            // Por si acaso
-            if (!letrasPorFila.value) { letrasPorFila.value = 5; } 
-            if(!formularioLetrasPalabra.value){formularioLetrasPalabra.value = 1}
-
-
             // Obtenemos los 2 inputs generados anteriormente para añadirle el evento al boton
             botonGenerarTabla.addEventListener('click', () => {
-                cargarDocumentoDOM(contenido, letrasPorFila.value, formularioLetrasPalabra.value);
+                // Validación de números positivos y no vacíos
+                let valLetras = parseInt(formularioLetrasPalabra.value);
+                let valColumnas = parseInt(letrasPorFila.value);
+
+                if (isNaN(valLetras) || valLetras <= 0 || isNaN(valColumnas) || valColumnas <= 0) {
+                    alert("Por favor, introduce números válidos y mayores a 0");
+                    return;
+                }
+
+                cargarDocumentoDOM(contenido, valColumnas, valLetras);
                 botonGenerarTabla.disabled = true;
             });
 
