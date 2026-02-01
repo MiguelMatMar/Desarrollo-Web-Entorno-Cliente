@@ -60,6 +60,8 @@ function leerArchivo(evento){
             // Obtenemos los 2 inputs generados anteriormente para añadirle el evento al boton
             botonGenerarTabla.addEventListener('click', () => {
                 cargarDocumentoDOM(contenido, letrasPorFila.value, formularioLetrasPalabra.value);
+                botonGenerarTabla.disabled = true;
+                botonGenerarTabla.removeEventListener('click');
             });
 
             // Hacemos lo mismo con el otro boton
@@ -69,6 +71,7 @@ function leerArchivo(evento){
             document.body.appendChild(bottonGenerarCSV);
             bottonGenerarCSV.addEventListener('click', () => {
                 generarCsv(archivo.name, [contenido]);
+                bottonGenerarCSV.disabled = true;
             });
             document.body.appendChild(saltoFila);
         };
