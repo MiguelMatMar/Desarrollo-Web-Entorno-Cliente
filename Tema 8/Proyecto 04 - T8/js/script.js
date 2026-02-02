@@ -1,16 +1,28 @@
 /**
  * Añadir el input file al cargar el DOM
  */
-document.addEventListener('DOMContentLoaded',() => {
-    // Creamos el file para seleccionar documentos
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Creamos el input pero lo ocultamos
     let fileSeleccionDocumentos = document.createElement('input');
     fileSeleccionDocumentos.type = 'file';
     fileSeleccionDocumentos.id = 'fileSeleccionDocumentos';
     fileSeleccionDocumentos.multiple = true;
+    fileSeleccionDocumentos.style.opacity = 0; // Se vuelve invisible
+    fileSeleccionDocumentos.style.position = 'absolute'; // No ocupa espacio real
+    
+    // 2. Creamos un label que hara de botón "limpio"
+    let labelBoton = document.createElement('label');
+    labelBoton.htmlFor = 'fileSeleccionDocumentos';
+    labelBoton.innerText = 'Presiona aquí para subir archivos';
+    labelBoton.style.cursor = 'pointer';
+    labelBoton.style.padding = '10px';
+    labelBoton.style.background = '#7f9ccb';
+    labelBoton.style.borderRadius = '5px';
+
+    document.body.appendChild(labelBoton);
     document.body.appendChild(fileSeleccionDocumentos);
 
-    // Añadimos el evento para cuando se vaya a cargar el archivo
-    document.getElementById('fileSeleccionDocumentos').addEventListener('change', leerArchivo);
+    fileSeleccionDocumentos.addEventListener('change', leerArchivo);
 });
 
 /**
