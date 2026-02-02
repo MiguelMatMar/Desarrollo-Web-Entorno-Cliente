@@ -34,8 +34,8 @@ function leerArchivo(evento){
         lector.onload = (eventoCarga) => {
             let saltoFila = document.createElement('br');
             document.body.appendChild(saltoFila);
-            // Guardamos todo el contenido en un array separado por ,
-            let contenido = eventoCarga.target.result.split(','); 
+            // Para que pueda filtrar por comas, puntos y comas, espacios e intros y quite los doble espacios
+            let contenido = eventoCarga.target.result.split(/[\s,;]+/).filter(p => p.trim() !== ""); 
 
             // Creamos el input de las letras por palabra y lo cargamos al dom
             let textoLetras = document.createElement('p');
@@ -83,8 +83,12 @@ function leerArchivo(evento){
             document.body.appendChild(bottonGenerarCSV);
             bottonGenerarCSV.addEventListener('click', () => {
                 let valLetras = parseInt(formularioLetrasPalabra.value);
-                generarCsv(archivo.name, contenido, valLetras);
-                console.log(archivo.name);
+                let valColumnas = parseInt(letrasPorFila.value); // Obtenemos las columnas también para el CSV
+                if (isNaN(valLetras) || valLetras <= 0 || isNaN(valColumnas) || valColumnas <= 0) {
+                    alert("Por favor, rellena ambos campos con valores válidos");
+                    return;
+                };
+                generarCsv(contenido, valLetras, valColumnas);
                 bottonGenerarCSV.disabled = true;
             });
             document.body.appendChild(saltoFila);
@@ -124,26 +128,30 @@ function cargarDocumentoDOM(array, columnasPorFila, letraPorPalabra) {
 }
 
 /**
- * Generar el archivo CSV
- * @param {string} nombreArchivo - Nombre del archivo original
+ * Generar el archivo CSV respetando la estructura de columnas
  * @param {Array} arrayContenido - Datos para el CSV
+ * @param {number} letraPorPalabra - Longitud de las palabras
+ * @param {number} columnasPorFila - Estructura de columnas
  */
-function generarCsv(nombreArchivo, arrayContenido, letraPorPalabra){
-    // Cambiamos las , por enters
+function generarCsv( arrayContenido, letraPorPalabra, columnasPorFila){
     let palabrasFiltradas = arrayContenido.filter(palabra => palabra.trim().length === parseInt(letraPorPalabra));
-    let contenidoCsv = palabrasFiltradas.join("\n");
+    let filas = [];
+    let cantidadColumnas = parseInt(columnasPorFila);
 
-    // Creamos el archivo con el contenido previo
-    let blob = new Blob([contenidoCsv], { type: 'text/csv;charset=utf-8;' });
-
-    let nombreArchivoSinExtension = "palabras" + letraPorPalabra;
+    // Separamos por las columnas que nos han dicho
+    for (let i = 0; i < palabrasFiltradas.length; i += cantidadColumnas) {
+        let unaFila = palabrasFiltradas.slice(i, i + cantidadColumnas);
+        filas.push(unaFila.join(";")); 
+    }
     
+    // Unimos todas las filas con un salto de línea
+    let contenidoCsv = filas.join("\r\n");
+
     // Creamos el link para descargar de forma automatica el documento
+    let blob = new Blob([contenidoCsv], { type: 'text/csv;charset=utf-8;' });
     let link = document.createElement("a");
-    let url = URL.createObjectURL(blob);
-    link.setAttribute("href", url);
-    link.setAttribute("download", nombreArchivoSinExtension.endsWith(".csv") ? nombreArchivoSinExtension : nombreArchivoSinExtension + ".csv");
-    document.body.appendChild(link);
+    link.href = URL.createObjectURL(blob);
+    link.download = "palabras_" + letraPorPalabra + ".csv";
     link.click();
     document.body.removeChild(link);
 }
