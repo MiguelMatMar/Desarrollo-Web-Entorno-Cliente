@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let musico1 = {
+            nombre: "Nathan",
+            apellido: "Explosion",
+            fecha_nacimiento: {
+                dia: 24,
+                mes: 5,
+                año: 1971
+        },
+            discos: ['The Dethalbum', 'The Doomstar Requiem', 'Dethalbum II']
+        };
+
+        musico1 = JSON.stringify(musico1);
+        console.log(`Musico a string ${musico1}`);
+
+        musico1 = JSON.parse(musico1);
+        console.log(`Musico a objeto ${musico1}`);
+
+        console.log(`La fecha de nacimiento del musico es: ${musico1.fecha_nacimiento.dia}/${musico1.fecha_nacimiento.mes}/${musico1.fecha_nacimiento.año}`);
+    </script>
+</body>
+</html>
