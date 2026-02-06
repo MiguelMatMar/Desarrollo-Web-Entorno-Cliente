@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        fetch('./misdatos.json')
+        .then(respuesta => {
+            if (respuesta.ok) {
+                return respuesta.parse(respuesta);
+            } else {
+                throw new Error("Los datos no llegaron bien");
+            }
+        }).then(datos => {
+            
+        })
+    </script>
+</body>
+</html>

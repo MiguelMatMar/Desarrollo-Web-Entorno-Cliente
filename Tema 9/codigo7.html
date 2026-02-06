@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Texto online</title>
+</head>
+<body>
+    <header>
+        <h1>Presentando datos en formato Texto</h1>
+    </header>
+    <main>
+        <pre> </pre>
+    </main>
+    <div id="error"></div>
+    <script>
+        //Salida de datos en nuestro documento
+        let pre = document.querySelector("pre");
+        let miError = document.getElementById("error");
+        //Capturamos datos desde la dirección dada
+        fetch("http://jsonplaceholder.typicode.com/posts/2")
+            .then(respuesta => respuesta.text()) //Devuelve el texto capturado
+            .then(texto => {
+                pre.innerHTML = texto;
+                console.log(texto); //Aquí vemos que lo obtenido es un texto
+            })
+            .catch(error => {
+                miError.innerText = error;
+            });
+    </script>
+</body>
+</html>

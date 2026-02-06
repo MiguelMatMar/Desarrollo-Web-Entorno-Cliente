@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Datos online</title>
+</head>
+<body>
+<h1>Presentando datos en formato JSON</h1>
+<p id="miID"></p>
+<script>
+var parrafo = document.getElementById("miID");
+fetch("http://jsonplaceholder.typicode.com/posts/72")
+.then(respuesta => {
+if (respuesta.ok) { //Nos aseguramos que no haya errores
+return respuesta.json(); //Devuelve un objeto en formato JSON
+} else {
+throw new Error("Los datos no llegaron bien");}
+})
+.then(miJSON => { //Recoge nuestra respuesta JSON
+console.log(miJSON); //Sacamos el objeto por consola
+//Volcamos los datos
+parrafo.innerHTML += `
+<strong>userId</strong>: ${miJSON.userId} <br>
+<strong>ID</strong>: ${miJSON.id} <br>
+<strong>title</strong>: ${miJSON.title} <br>
+<strong>body</strong>: ${miJSON.body}`;
+}) //Lo podemos hacer así por miJSON es un objeto con sus propiedades
+.catch(error => {
+parrafo.textContent = "Error: " + error;
+});
+</script>
+</body>
+</html>

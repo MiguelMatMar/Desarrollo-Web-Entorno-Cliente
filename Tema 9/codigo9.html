@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Datos online</title>
+</head>
+<body>
+    <h1>Presentando datos en formato JSON</h1>
+    <p id="miID"></p>
+
+    <script>
+        var parrafo = document.getElementById("miID");
+
+        fetch("http://jsonplaceholder.typicode.com/posts?userId=1")
+        .then(respuesta => {
+            if (respuesta.ok) {
+                return respuesta.json();
+            } else {
+                throw new Error("Los datos no llegaron bien");
+            }
+        })
+        .then(miJSON => {
+            console.log(miJSON);
+
+            miJSON.forEach(element => {
+
+                function mostrarClaveValor(clave, valor) {
+                    let strong = document.createElement("strong");
+                    strong.textContent = clave + ": ";
+
+                    let texto = document.createTextNode(valor);
+
+                    let br = document.createElement("br");
+
+                    parrafo.appendChild(strong);
+                    parrafo.appendChild(texto);
+                    parrafo.appendChild(br);
+                }
+
+                mostrarClaveValor("userId", element.userId);
+                mostrarClaveValor("id", element.id);
+                mostrarClaveValor("title", element.title);
+                mostrarClaveValor("body", element.body);
+
+                parrafo.appendChild(document.createElement("br"));
+            });
+        })
+        .catch(error => {
+            parrafo.textContent = "Error: " + error;
+        });
+    </script>
+</body>
+</html>

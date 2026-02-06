@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="demo"></p>
+
+    <script>
+        let parrafo = document.getElementById("demo");
+            fetch("http://localhost:8080/index.php") //Si conecta, se activa el primer then
+            .then(respuesta => respuesta.text()) //Si éxito se activa el 2º then
+            .then(texto => { //texto es el resultado de respuesta.text()
+                parrafo.innerHTML = texto;
+            })//Cualquier error activaría el catch
+            .catch(error => {
+                parrafo.innerText = error;
+            });
+    </script>
+</body>
+</html>
