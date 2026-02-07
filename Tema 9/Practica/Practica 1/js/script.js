@@ -2,7 +2,7 @@ fetch("./js/datos.json")
   .then(response => response.json())
   .then(datos => {
     
-    let registro = Array.isArray(datos) ? datos[0] : datos;
+    let registro = Array.isArray(datos) ? datos[0] : datos; // Comprueba si el json viene con corchetes y si si, selecciona el primero, sino selecciona tal cual
     let formulario = document.getElementById("formulario");
 
     for (let clave in registro) {
