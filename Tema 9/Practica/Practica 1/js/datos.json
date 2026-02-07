@@ -1,0 +1,10 @@
+{
+  "DNI": "12345678Z",
+  "Nombre y apellidos": "Ana García Fedriani",
+  "Dirección": "Avenida de la Constitución, 45",
+  "Ciudad": "Sevilla",
+  "Email": [
+    "ana.garcia@gmail.com",
+    "contacto@empresa.es"
+  ]
+}

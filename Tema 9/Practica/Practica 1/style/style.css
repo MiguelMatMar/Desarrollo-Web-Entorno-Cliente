@@ -1,0 +1,60 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+#formulario {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 0.9rem;
+    color: #444;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    text-transform: capitalize;
+    font-weight: 600;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #fafafa;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #3498db;
+    background-color: #fff;
+}
+
+.contenedor-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.contenedor-vertical input {
+    border-left: 3px solid #3498db;
+}
+
+#formulario > input:first-of-type {
+    margin-top: 0;
+}

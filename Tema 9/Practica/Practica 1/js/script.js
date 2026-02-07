@@ -1,33 +1,37 @@
-fetch("datos.json")
+fetch("./js/datos.json")
   .then(response => response.json())
   .then(datos => {
-    const formulario = document.getElementById("formulario");
+    
+    let registro = Array.isArray(datos) ? datos[0] : datos;
+    let formulario = document.getElementById("formulario");
 
-    for (let clave in datos) {
+    for (let clave in registro) {
 
       // Crear label
-      const label = document.createElement("label");
+      let label = document.createElement("label");
       label.textContent = clave;
       formulario.appendChild(label);
 
-      // Si el valor es un array (Email)
-      if (Array.isArray(datos[clave])) {
-        const ul = document.createElement("ul");
-        ul.classList.add("email-list");
+      // Si el valor es un array como el Email por ejemplo
+      if (Array.isArray(registro[clave])) {
+        // Creamos para que se vea en vertical
+        let contenedorEmails = document.createElement("div");
+        contenedorEmails.classList.add("contenedor-vertical");
 
-        datos[clave].forEach(email => {
-          const li = document.createElement("li");
-          li.textContent = email;
-          ul.appendChild(li);
+        registro[clave].forEach(email => {
+          let inputEmail = document.createElement("input");
+          inputEmail.type = "email";
+          inputEmail.value = email;
+          contenedorEmails.appendChild(inputEmail);
         });
 
-        formulario.appendChild(ul);
+        formulario.appendChild(contenedorEmails);
 
       } else {
         // Crear input normal
-        const input = document.createElement("input");
+        let input = document.createElement("input");
         input.type = "text";
-        input.value = datos[clave];
+        input.value = registro[clave];
         formulario.appendChild(input);
       }
     }
