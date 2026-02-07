@@ -1,0 +1,113 @@
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: #1f2937;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    width: 90%;
+    max-width: 550px;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+
+h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(to right, #4f46e5, #9333ea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 2rem;
+    letter-spacing: -0.025em;
+}
+
+.field-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid #f3f4f6;
+    border-radius: 12px;
+    background-color: #f9fafb;
+    box-sizing: border-box;
+    font-size: 1rem;
+    color: #111827;
+    transition: all 0.2s ease;
+    resize: none;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #818cf8;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+input[readonly], textarea[readonly] {
+    cursor: default;
+}
+
+.navigation {
+    display: flex;
+    gap: 1.2rem;
+    margin-top: 2rem;
+}
+
+button {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    border-radius: 12px;
+    background: #4f46e5;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3);
+}
+
+button:hover {
+    background: #4338ca;
+    box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.4);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+#btnAnterior {
+    background: #ffffff;
+    color: #4f46e5;
+    border: 2px solid #4f46e5;
+    box-shadow: none;
+}
+
+#btnAnterior:hover {
+    background: #f5f3ff;
+}

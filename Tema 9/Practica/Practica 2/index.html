@@ -1,13 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>PRACTICA02EVA3</title>
     <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
-    
+
+    <div class="container">
+        <h1>Visor de Posts</h1>
+        <form id="postForm">
+            <div class="field-group">
+                <label for="userId">User ID</label>
+                <input type="text" id="userId" readonly>
+            </div>
+            <div class="field-group">
+                <label for="id">ID</label>
+                <input type="text" id="id" readonly>
+            </div>
+            <div class="field-group">
+                <label for="title">Título</label>
+                <input type="text" id="title" readonly>
+            </div>
+            <div class="field-group">
+                <label for="body">Cuerpo</label>
+                <textarea id="body" rows="5" readonly></textarea>
+            </div>
+
+            <div class="navigation">
+                <button type="button" id="btnAnterior">Anterior</button>
+                <button type="button" id="btnSiguiente">Siguiente</button>
+            </div>
+        </form>
+    </div>
 
     <script src="./script/script.js"></script>
 </body>
