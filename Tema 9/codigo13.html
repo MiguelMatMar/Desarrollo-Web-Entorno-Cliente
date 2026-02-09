@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Obtener datos</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="http://jsonplaceholder.typicode.com/albums" method="POST">
+        <label for="user">Escriba el número de usuario</label><br>
+        <input type="text" id="user" name="userId">
+        <p>
+            <label for="title">Escriba una frase de título</label><br>
+            <input type="text" id="title" name="titlename">
+        <p>
+            <button type="submit">Comprobar</button>
+    </form>
+    <div id="resultado">Resultado</div> <!--Lo usamos para errores-->
+    <script>
+        var miForm = document.querySelector("form");//Capturamos el form
+        var capaRes = document.getElementById("resultado");
+        var miUser = document.getElementById("user");
+        var miTitle = document.getElementById("title");
+        miForm.addEventListener("submit", (ev) => {
+            ev.preventDefault();//Evito el funcionamiento por defecto
+            let data = new FormData(miForm); //Creo mi objeto FormData
+            //y lo muestro por consola a modo informativo
+            for (let [dato, valor] of data) {
+                console.log(`${dato}=${valor}`);
+            }//Comprobamos username=texto, titlename=texto
+            //Conectamos con el servidor
+            fetch(miForm.getAttribute("action"), {
+                method: miForm.getAttribute("method"),
+                body: data
+            })//Con FormData No nos harán falta headers.
+                //Prueba a quitarlos del código anterior
+                .then(respuesta => respuesta.json())
+                .then(datos => {
+                    console.log(datos);
+                    capaRes.textContent = datos;
+                })
+                .catch(err => {
+                    capaRes.textContent = "Error: " + err;
+                })
+        });
+        //Controlo el foco de mis campos
+        miUser.addEventListener("focus", ev => {
+            capaRes.textContent = "";
+            miUser.selectionStart = 0;
+            miUser.selectionEnd = miUser.value.length;
+        });
+        miTitle.addEventListener("focus", ev => {
+            capaRes.textContent = "";
+            miTitle.selectionStart = 0;
+            miTitle.selectionEnd = miTitle.value.length;
+        });
+    </script>
+</body>
+
+</html>
