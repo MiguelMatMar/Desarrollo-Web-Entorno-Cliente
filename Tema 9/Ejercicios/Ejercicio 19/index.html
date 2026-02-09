@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Imagen del día</title>
+</head>
+
+<body>
+    <main>
+        <p>Esperando datos...</p>
+    </main>
+    <script>
+        var main = document.querySelector("main"); //Capa main
+        fetch("http://localhost:8000/misImagenes/imagen1.jpg")
+            .then(respuesta => {
+                if (respuesta.ok) {
+                    return respuesta.blob();//Nos vamos al .then
+                } else {
+                    throw new Error("¡ups! Los datos no llegaron bien");
+                }
+            })
+            .then(miBlob => {//recojo el valor de respuesta.blob()
+                console.log(miBlob.type);
+                //DOM -> Creamos un nuevo elemento de html img
+                let imagen = document.createElement("img");
+                //Asignamos al atributo src del elemento creado, la URL
+                //virtual de la imagen descargada
+                console.log(URL.createObjectURL(miBlob)); //Mostramos la
+                //url antes de usarla
+                imagen.setAttribute("src", URL.createObjectURL(miBlob));
+                main.innerHTML = ""; //Borramos párrafo "Esperando datos…"
+                //colocamos la imagen en la capa main
+                main.appendChild(imagen);
+                
+            })
+            .catch(error => {
+                main.textContent = error;
+            });
+    </script>
+</body>
+
+</html>
