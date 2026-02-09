@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        fetch('https://jsonplaceholder.typicode.com/albums?userId=2')
+        .then(respuesta => respuesta.json())
+        .then(datos => {
+            let negrita;
+            let br;
+            datos.forEach(elemento => {
+                console.log(elemento)
+                br = document.createElement("br");
+                negrita = document.createElement("strong");
+                negrita.innerText = "User ID: "+ elemento.userId +" ID: "+elemento.id + " Title: " + elemento.title;
+                document.body.appendChild(negrita);
+                document.body.appendChild(br);
+            });
+        })
+    </script>
+</body>
+</html>
