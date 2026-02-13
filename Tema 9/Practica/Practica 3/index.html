@@ -1,21 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Práctica 03 EVA3 - Request/Response</title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <form action="./recibe.php" method="post">
-        <label for="email">Email:</label><br>
-        <input type="text" name="email" id="email"><br>
-        <label for="passwd">Contraseña: </label><br>
-        <input type="password" name="passwd" id="passwd"><br>
-        <input type="submit" value="Enviar">
-        <input type="reset" value="Reset">
-        <input type="button" value="Aleatorio" id="aleatorio">
-        <input type="button" value="Mostrar Contraseña" id="mostrarPasswd">
-    </form>
+
+    <header>
+        <h1>Acceso al Sistema</h1>
+        <div class="credenciales-info">
+            <p><strong>INSTRUCCIONES DE ACCESO:</strong></p>
+            <ul>
+                <li><strong>Administrador:</strong> admin@mail.es / Admin123!</li>
+                <li><strong>Estándar:</strong> aragorn@mail.es / Aragorn123!</li>
+                <li><em>Cualquier otro:</em> "Usuario no reconocido".</li>
+            </ul>
+        </div>
+    </header>
+
+    <main id="app-container">
+        <form id="login-form">
+            <div class="field">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="field">
+                <label for="pass">Contraseña:</label>
+                <input type="password" id="pass" name="pass" required>
+            </div>
+            
+            <p id="error-msg" class="hidden" style="color: red; font-weight: bold;">Usuario no reconocido</p>
+            
+            <div class="buttons">
+                <button type="submit">Enviar</button>
+                <button type="reset" id="btn-reset">Reset</button>
+            </div>
+        </form>
+    </main>
+
     <script src="./js/script.js"></script>
 </body>
 </html>
