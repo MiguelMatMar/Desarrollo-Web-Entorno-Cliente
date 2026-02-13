@@ -1,0 +1,110 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle, #2c3e50, #000000);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+#selectorDificultad h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.botones-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+button.dificultadJuego, #btnReiniciar {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #e67e22, #d35400);
+    color: white;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+button.dificultadJuego:hover, #btnReiniciar:hover {
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 10px 20px rgba(230, 126, 34, 0.4);
+}
+
+#infoJuego {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 20px;
+    padding: 15px 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    & p{
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: #f1c40f;
+    }
+}
+
+
+section#tableroPuzle {
+    display: grid;
+    padding: 10px;
+    border: 8px solid #333;
+    border-radius: 12px;
+    background-color: #1a1a1a;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    transition: gap 0.5s ease;
+}
+
+section#tableroPuzle div {
+    cursor: grab;
+    transition: all 0.2s ease, border 0.3s ease;
+    border-radius: 4px;
+    position: relative;
+    height: 150px;
+    width: 150px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+section#tableroPuzle div:active {
+    cursor: grabbing;
+}
+
+section#tableroPuzle div:hover {
+    filter: brightness(1.2);
+    transform: scale(0.98);
+}
+
+.ocultar {
+    display: none !important; 
+}
+
+#btnReiniciar {
+    margin-top: 30px;
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+}
+
+.victoria-anim {
+    animation: bounce 0.5s ease 3;
+}
