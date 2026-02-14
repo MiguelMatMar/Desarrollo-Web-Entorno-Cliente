@@ -19,6 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+// Evento para capturar las teclas ALT + F12
+document.addEventListener('keydown',(tecla)=>{
+    if(tecla.key === "F12" && tecla.altKey){
+        solucionarJuego();
+    }
+})
 
 /**
  * Configura los parámetros iniciales del juego según la dificultad seleccionada.
@@ -231,11 +237,16 @@ function finalizarJuego(victoria) {
     document.body.dataset.juegoActivo = "false";
     let tablero = document.getElementById('tableroPuzle');
     
-    if (victoria) {
+    if (victoria = "solucion") {
+        tablero.style.gap = "0px"; // Le quitamos el espaciado
+        Array.from(tablero.children).forEach(p => p.style.border = "none"); // Le quitamos los bordes
+        alert("Juego Solucionado");
+        
+    } else if(victoria) {
         tablero.style.gap = "0px"; // Le quitamos el espaciado
         Array.from(tablero.children).forEach(p => p.style.border = "none"); // Le quitamos los bordes
         alert("¡Felicidades! Has ganado.");
-    } else {
+    }else{
         alert("¡Tiempo o Intentos agotados!");
     }
     
@@ -275,3 +286,26 @@ function gestionarSeleccion(caja, numImagenes) {
         document.body.dataset.primeraPiezaId = ""; // Limpiamos el dataset para la próxima jugada
     }
 }
+
+/**
+ * Cuando el usuario quiera solucionar el juego, esta funcion ordena las casillas y las presenta en la caja
+ * @param {HTMLElement} casillas - Casillas sobre las que interactua el jugador
+ * @param {Array} ordenadas - Casillas ordenadas segun el id que tienen, se presentan en pantalla
+ */
+function solucionarJuego() {
+    let casillas = document.getElementById('tableroPuzle').children;
+    casillas = Array.from(casillas);
+
+    // Extraemos y ordenamos por el número del id (num1, num2, etc.)
+    let ordenadas = casillas.sort((a, b) => {
+        let idA = parseInt(a.id.replace('num', ''));
+        let idB = parseInt(b.id.replace('num', ''));
+        return idA - idB; // Orden ascendente
+    });
+
+    // Reordenamos el dom
+    let tablero = document.getElementById('tableroPuzle');
+    ordenadas.forEach(casilla => tablero.appendChild(casilla)); // Reinserta en orden
+
+    finalizarJuego("solucion");
+}   
